@@ -1,0 +1,10 @@
+{
+  "eval_id": 0,
+  "eval_name": "romania-opening",
+  "prompt": "I'm starting a new game as Romania in 1936 — what should my first few focuses and priorities be?",
+  "assertions": [
+    "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names",
+    "Mentions at least one concrete 1936 starting stat for Romania (states, factories, research slots, etc.) matching references/05-countries/romania.md",
+    "Advice is specific to Romania's actual situation (oil resources, Hungary/USSR border tension, minor-power constraints) rather than generic HOI4 advice that could apply to any country"
+  ]
+}

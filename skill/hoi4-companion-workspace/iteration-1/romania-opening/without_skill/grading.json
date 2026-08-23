@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names",
+      "passed": false,
+      "evidence": "Explicitly says 'Regardless of exact focus names (these can shift slightly between patches/DLC)' and gives only generic categories ('political stabilization focuses', 'economic/industry focuses') \u2014 zero actual focus names cited."
+    },
+    {
+      "text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md",
+      "passed": false,
+      "evidence": "No factory counts, population, research slots, or oil numbers given anywhere."
+    },
+    {
+      "text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice",
+      "passed": true,
+      "evidence": "Correctly identifies Ploiesti oil, Hungary/Transylvania and USSR/Bessarabia claims, Little Entente \u2014 broad strokes right, but no specifics."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.3333,
+    "passed": 1,
+    "failed": 2,
+    "total": 3
+  }
+}

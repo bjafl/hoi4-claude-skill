@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "States the over-width penalty formula matching the file",
+      "passed": false,
+      "evidence": "Describes the mechanism qualitatively (excess divisions become reserves) but does not give the exact -100% x (total-battle)/battle formula."
+    },
+    {
+      "text": "States Forest terrain's base combat width as 60",
+      "passed": false,
+      "evidence": "Gives 'roughly 15-20% less than plains' as a rough estimate, not the exact value 60."
+    },
+    {
+      "text": "States Forest's +30 per extra attack direction",
+      "passed": false,
+      "evidence": "Not mentioned at all."
+    },
+    {
+      "text": "Does not hedge with approximate language",
+      "passed": false,
+      "evidence": "Explicitly self-flags: 'exact numeric constants...are approximate recollection...should be checked against a current wiki'."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.0,
+    "passed": 0,
+    "failed": 4,
+    "total": 4
+  }
+}

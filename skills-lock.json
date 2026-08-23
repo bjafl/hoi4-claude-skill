@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "developing-claude-code-plugins": {
+      "source": "obra/superpowers-developing-for-claude-code",
+      "sourceType": "github",
+      "skillPath": "skills/developing-claude-code-plugins/SKILL.md",
+      "computedHash": "1bd422bdd44fe3262f43e6f139041c5d1e6231ad49da74e0c2ed7b7bdad1b7ee"
+    }
+  }
+}

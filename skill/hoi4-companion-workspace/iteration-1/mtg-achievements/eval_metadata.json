@@ -1,0 +1,10 @@
+{
+  "eval_id": 2,
+  "eval_name": "mtg-achievements",
+  "prompt": "What achievements are available for the Man the Guns DLC and how do I unlock them?",
+  "assertions": [
+    "Every achievement name listed actually appears in references/07-achievements/man-the-guns.md",
+    "No achievement from a different DLC group is misattributed to Man the Guns",
+    "Conditions given match what's in the file, not invented/approximated conditions"
+  ]
+}

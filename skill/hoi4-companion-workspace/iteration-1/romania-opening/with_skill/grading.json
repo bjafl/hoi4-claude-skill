@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names",
+      "passed": true,
+      "evidence": "Cites Preserve Greater Romania, Balkans Dominance, Institute Royal Dictatorship, Civil Works, National Defense Industry, Expand Ploiesti Oil Production, Army Maneuvers, Army War College, Expand the Air Force, Expand the Galati Shipyards \u2014 with correct prerequisites and mutual-exclusion relationships."
+    },
+    {
+      "text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md",
+      "passed": true,
+      "evidence": "12 states, 18.07M population, 20 factories (11 civ/7 mil/2 naval), 44 oil, 3 research slots \u2014 all specific numbers."
+    },
+    {
+      "text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice",
+      "passed": true,
+      "evidence": "Discusses Neutral Foreign Policy spirit's specific tension-limit penalties, Ploiesti oil as strategic asset, Hungary/USSR border threats, Little Entente guarantees by name."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "skill_name": "hoi4-companion",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "romania-opening",
+      "prompt": "I'm starting a new game as Romania in 1936 — what should my first few focuses and priorities be?",
+      "expected_output": "Should cite Romania's actual 1936 starting position and focus tree from the corpus (specific focus names, not generic advice), and ground strategic advice in real game mechanics rather than vague platitudes.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "eval_name": "combat-width-formula",
+      "prompt": "What's the exact combat width formula and how much does forest terrain reduce it?",
+      "expected_output": "Should give the exact numeric combat-width penalty formula and the specific Forest terrain values (base width 60, +30 per extra attack direction) from land-combat.md — not an approximate or hallucinated number.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "mtg-achievements",
+      "prompt": "What achievements are available for the Man the Guns DLC and how do I unlock them?",
+      "expected_output": "Should list the actual Man the Guns achievement names and conditions from the corpus, not invented ones.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "eval_name": "germany-supply-problem",
+      "prompt": "I keep running out of supply when I push into Russia as Germany — what's going wrong and how do I fix it?",
+      "expected_output": "Should diagnose using real supply mechanics (supply hubs, railway levels, truck requirements) from supply-and-logistics.md and give concrete, mechanically-grounded fixes rather than generic advice.",
+      "files": []
+    }
+  ]
+}

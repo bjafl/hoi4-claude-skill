@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Mentions supply hubs and/or railway levels matching the mechanics file",
+      "passed": true,
+      "evidence": "Mentions building railways and forward supply hubs \u2014 directionally correct even without the file."
+    },
+    {
+      "text": "Gives at least one concrete, mechanically-specific fix",
+      "passed": true,
+      "evidence": "Logistics Company support company, Logistics Wizard general, multi-corridor advance \u2014 reasonably concrete, though no exact numbers/thresholds."
+    },
+    {
+      "text": "Does not contradict the corpus's supply model",
+      "passed": true,
+      "evidence": "No explicit contradiction found, though doesn't reflect the exact three-tier state/hub/aerial supply stacking model or the Deutsches Heer spirit Germany-specific detail."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

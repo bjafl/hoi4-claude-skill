@@ -1,0 +1,11 @@
+{
+  "eval_id": 1,
+  "eval_name": "combat-width-formula",
+  "prompt": "What's the exact combat width formula and how much does forest terrain reduce it?",
+  "assertions": [
+    "States the over-width penalty formula matching references/02-land-warfare/land-combat.md (combat width penalty = -100% x (total_width - battle_width) / battle_width, or equivalent)",
+    "States Forest terrain's base combat width as 60 (matching the file)",
+    "States Forest's +30 per extra attack direction (matching the file)",
+    "Does not present these numbers as approximate or hedge with 'around'/'roughly' — the file has exact figures"
+  ]
+}

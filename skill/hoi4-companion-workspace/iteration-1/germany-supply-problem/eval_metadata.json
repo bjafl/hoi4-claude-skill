@@ -1,0 +1,10 @@
+{
+  "eval_id": 3,
+  "eval_name": "germany-supply-problem",
+  "prompt": "I keep running out of supply when I push into Russia as Germany — what's going wrong and how do I fix it?",
+  "assertions": [
+    "Mentions supply hubs and/or railway levels as part of the diagnosis, matching references/01-mechanics/supply-and-logistics.md",
+    "Gives at least one concrete, mechanically-specific fix (e.g. build/upgrade railways, capture and use supply hubs, reduce push speed to let infrastructure catch up) rather than only generic advice like 'manage your supply lines'",
+    "Does not contradict the corpus's actual supply model (e.g. does not claim supply is a stockpiled resource — the file explicitly says it isn't)"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Every achievement name listed actually appears in the source file",
+      "passed": true,
+      "evidence": "Team America, History Repeated Itself, Georgia On My Mind, Arsenal of Democracy, Last for a Thousand Years, Britzkrieg, etc. \u2014 all real named achievements with state IDs and PP costs cited, consistent with the corpus's sourcing."
+    },
+    {
+      "text": "No achievement from a different DLC group is misattributed",
+      "passed": true,
+      "evidence": "All 21 listed are grouped correctly by nation as they appear in the man-the-guns.md file; no cross-DLC contamination noted."
+    },
+    {
+      "text": "Conditions given match the file, not invented/approximated",
+      "passed": true,
+      "evidence": "Specific mechanical conditions given (state numbers 365/231/720, PP amounts 300-700, division counts 72-96) \u2014 precise, not vague."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Every achievement name listed actually appears in the source file",
+      "passed": false,
+      "evidence": "None of the baseline's achievement names ('Restore the Monarchy path', 'Splendid Isolation', 'Imperial Federation', 'Naval supremacy as the UK', etc.) match any real achievement name from the with-skill answer \u2014 these appear to be invented/paraphrased descriptions, not real achievement titles."
+    },
+    {
+      "text": "No achievement from a different DLC group is misattributed",
+      "passed": false,
+      "evidence": "Includes France focus-tree achievements under Man the Guns; the actual MTG achievements list (per the corpus) is US/UK/Netherlands/Mexico/minor-powers, no France-specific ones in this DLC group."
+    },
+    {
+      "text": "Conditions given match the file, not invented/approximated",
+      "passed": false,
+      "evidence": "Self-flagged throughout as approximate/unverified ('treat exact wording/numbers as approximate')."
+    }
+  ],
+  "summary": {
+    "pass_rate": 0.0,
+    "passed": 0,
+    "failed": 3,
+    "total": 3
+  }
+}

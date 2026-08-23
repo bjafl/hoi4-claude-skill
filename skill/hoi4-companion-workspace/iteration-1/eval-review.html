@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "hoi4-companion", "runs": [{"id": "romania-opening-with_skill", "prompt": "I'm starting a new game as Romania in 1936 \u2014 what should my first few focuses and priorities be?", "eval_id": 0, "outputs": [{"name": "answer.md", "type": "text", "content": "# Romania 1936 \u2014 Opening Focuses and Priorities\n\n## Starting position (why Romania plays the way it does)\n\nRomania (tag **ROM**) starts as a constitutional monarchy under **King Carol II**, ruling party **Partidul Na\u021bional Liberal** (60% popularity), democratic ideology. It has 12 states, 18.07M core population, and a **20-factory industrial base (11 civilian / 7 military / 2 naval dockyards)**, 40 building slots, 3 research slots (2 more unlockable via focuses). Resource-wise its standout asset is **44 units of oil** \u2014 its most valuable strategic resource, since Germany and the USSR will both want it later. It starts with essentially no aluminum/rubber/tungsten/chromium and only 3 steel and 5 coal, so early industry focuses matter a lot.\n\nIt starts with two national spirits:\n- **King Carol II's Lifestyle** (hedonism, dampens stability)\n- **Neutral Foreign Policy** \u2014 a genuinely costly spirit: +100% join-faction tension limit, +100% guarantee tension limit, +250% embargo tension limit, and a \u2212100 AI \"desire to join/expand a faction\" modifier. This is the single biggest early diplomatic drag and several branches exist specifically to shed it.\n\nRomania is bordered by Hungary (west), Poland (north/northwest, friendly), the USSR (north/northeast), Czechoslovakia (north), Bulgaria (southeast, little threat in 1936), and Yugoslavia/Greece (south, allied via the Balkan Pact). It starts with **guarantees given to Czechoslovakia, Yugoslavia, Turkey and Greece** (Little Entente/Balkan Pact) but no faction membership.\n\n## The core early decision: which root focus?\n\nRomania's focus tree has **two mutually exclusive root political focuses**, and this is the first real choice:\n\n| Root focus | What it does | Playstyle |\n|---|---|---|\n| **Preserve Greater Romania** | National spirit: Preserve Greater Romania (Guarantee tension limit \u2212100%, guarantee cost \u221250%). Opens branches toward the USSR (A Deal With the Devil \u2192 Comintern), Germany (Trade Treaty With Germany \u2192 Axis), or the West (Renew Romanian-Polish Alliance \u2192 Cordon Sanitaire or Allies). | Diplomatic/alliance-based \u2014 pick a great-power patron or build the Cordon Sanitaire with Poland/Czechoslovakia. |\n| **Balkans Dominance** | National spirit: Balkans Dominance (war goal justify time \u221225%, can create factions). Immediately **replaces the Balkan Pact (+25 opinion) with \"Incongruous Neighbors\" (\u221230 opinion)** toward Bulgaria and Hungary, and every country that had Balkan Pact with Romania loses it. Opens the regional-conquest branch (Puppet Bulgaria \u2192 Secure Greece \u2192 Secure the Bosporus \u2192 Divide Yugoslavia, plus Align Hungary \u2192 Split Czechoslovakia). | Aggressive regional hegemon \u2014 subjugate Bulgaria, Greece, Turkey, Yugoslavia, pressure Hungary. |\n\nBoth roots unlock the shared **Civil Works / National Defense Industry** economic sub-branch, so the economic path below is available either way \u2014 but note Balkans Dominance's conquest focuses have steep gates (e.g. **Puppet Bulgaria** needs 150%+ army strength vs. Bulgaria and 400K+ manpower in divisions, **Secure Greece** needs 500K+ manpower in divisions), so it's a mid-game payoff, not something you complete in month one.\n\n## Recommended first several focuses\n\n### 1. Pick your root focus first\nTake **Preserve Greater Romania** if you want to play it safe and choose a faction later (or build the Cordon Sanitaire), or **Balkans Dominance** if you want to grow Romania territorially early. Either way, this is worth taking turn one since it's the gateway to everything else.\n\n### 2. Institute Royal Dictatorship (parallel branch, take early)\nAvailable immediately (only requires: independent, and less than 50% support for PCR/Garda de Fier/FRN). Effects: **+120 political power**, Carol II becomes leader (Non-Aligned, Hedonist), stability \u22125%, FRN becomes ruling party (no elections), and \u2014 importantly \u2014 **removes the Neutral Foreign Policy spirit**, shedding those punishing tension-limit penalties. The stability hit is real, but the +120 PP and removal of Neutral Foreign Policy make this a strong early pick regardless of which root you took.\n\n### 3. Civil Works (if you took Preserve Greater Romania) / National Defense Industry (if you took Balkans Dominance)\n- **Civil Works** (prereq: Preserve Greater Romania): 2\u00d7100% research bonus for Industry.\n- **National Defense Industry** (prereq: Balkans Dominance): adds building slots + military factories in Oltenia/Moldova.\n\nEither feeds into the shared industrial sub-branch: **Agrarian Reform \u2192 Danubian Transport Network \u2192 MALAXA (or Invite Foreign Motor Companies) \u2192 Hunedoara Steel Works \u2192 Invest in the IAR \u2192 Expand Ploiesti Oil Production.**\n\nThis last one is the payoff worth planning toward early: **Expand Ploiesti Oil Production** (requires both Hunedoara Steel Works AND Invest In the IAR, plus full control of Muntenia) adds **+24 oil production** to Muntenia \u2014 a huge boost on top of Romania's already-strong 44 base oil. After that, **Expand the University of Bucharest** (needs 50+ factories) grants a research slot, and **Exploit the Baita Mines** adds +25% nuclear reactor construction speed if you're going long-game.\n\n### 4. Army Maneuvers and/or Expand the Air Force (parallel, root-level, no prerequisites)\nBoth are available turn one and don't compete with the political branches for focus slots' prerequisites (only your focus queue is limited to one at a time). Recommended early picks:\n- **Army Maneuvers** \u2192 **Army War College** (National spirit: Army leader cost \u221230%, spawns a 2-skill general) \u2192 **The ZB-53** (100% research bonus to Infantry Weapons) \u2014 cheap, immediate value for a country with only 7 military factories.\n- **Expand the Air Force** \u2192 grants +25 air experience and 6 extra air base levels split across Muntenia/Moldova \u2014 useful since Romania only starts with 7 air base levels.\n\n### 5. Naval branch (lower priority)\n**Expand the Galati Shipyards** (root, no prereqs) grants +25 navy experience and 2 extra naval dockyards \u2014 worth taking eventually given Romania's 12 naval base levels on the Black Sea, but with only 2 starting dockyards this is a longer-term investment, not a first-five-focuses pick unless you specifically want Black Sea Dominance/Coastal Defense Navy MIOs.\n\n## Non-focus priorities for the opening (generic HOI4 openers, still applicable to Romania)\n\n- **Research slots are the highest-ROI early unlock.** Romania starts with only 3 (Expand the University of Bucharest adds a 4th later; The Royal Foundation, under Institute Royal Dictatorship \u2192 Revise the Constitution, also grants a research slot). Prioritize unlocking these over rushing military tech.\n- **Production lines:** with only 7 military factories at game start, don't spread across 5+ equipment types \u2014 concentrate on Infantry Equipment I for reinforcements plus 1\u20132 Support Equipment lines (cheap, no strategic resources, reaches its production cap in ~30\u201350 days) before branching into artillery or armor.\n- **Efficiency discipline:** military factories start at 10% efficiency and take ~300+ days to approach the ~50% cap: don't switch an established line unless facing an actual shortfall, since switching cuts efficiency by 70\u201390%.\n- **Stability:** starting at a deficit already (King Carol II's Lifestyle, and \u22125% more from Institute Royal Dictatorship if you take it) \u2014 stability below 50% costs 1% factory output per 1% shortfall, so watch this before it erodes your already-small 20-factory base.\n- **Conscription law:** Romania starts democratic (Volunteer Only, 1.5% recruitable population) unless/until you shift ideology via the focus tree; don't try to rush higher conscription levels before war support rises.\n- **Don't declare war early without justification** \u2014 Balkans Dominance's conquest focuses (Puppet Bulgaria, Secure Greece, etc.) gate on army-strength percentages and manpower-in-divisions thresholds specifically so you build up first; treat war as the payoff of a focus-tree branch, not a turn-30 decision.\n\n## Summary opening order (example, Balkans-Dominance lane)\n\n1. **Balkans Dominance** (root)\n2. **Institute Royal Dictatorship** (removes Neutral Foreign Policy, +120 PP)\n3. **National Defense Industry** (military factories + building slots)\n4. **Army Maneuvers** \u2192 **Army War College**\n5. **Agrarian Reform** \u2192 **Danubian Transport Network** \u2192 toward MALAXA/Hunedoara Steel Works/Invest in the IAR \u2192 **Expand Ploiesti Oil Production**\n6. **Align Hungary** or **Puppet Bulgaria** once army-strength/manpower thresholds are met, to start the regional conquest payoff.\n\n(Swap step 1 for **Preserve Greater Romania** and step 6 for the alliance branch of your choice \u2014 Germany/Trade Treaty With Germany, USSR/A Deal With the Devil, or West/Renew Romanian-Polish Alliance \u2014 if you'd rather play the diplomatic lane.)\n\n## Files consulted\n\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/SKILL.md`\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/references/05-countries/romania.md`\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/references/06-focus-trees/romania.md`\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/references/08-strategy/opening-build-orders.md`\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/references/08-strategy/beginners-guide.md`\n"}], "grading": {"expectations": [{"text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names", "passed": true, "evidence": "Cites Preserve Greater Romania, Balkans Dominance, Institute Royal Dictatorship, Civil Works, National Defense Industry, Expand Ploiesti Oil Production, Army Maneuvers, Army War College, Expand the Air Force, Expand the Galati Shipyards \u2014 with correct prerequisites and mutual-exclusion relationships."}, {"text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md", "passed": true, "evidence": "12 states, 18.07M population, 20 factories (11 civ/7 mil/2 naval), 44 oil, 3 research slots \u2014 all specific numbers."}, {"text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice", "passed": true, "evidence": "Discusses Neutral Foreign Policy spirit's specific tension-limit penalties, Ploiesti oil as strategic asset, Hungary/USSR border threats, Little Entente guarantees by name."}], "summary": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3}}}, {"id": "romania-opening-without_skill", "prompt": "I'm starting a new game as Romania in 1936 \u2014 what should my first few focuses and priorities be?", "eval_id": 0, "outputs": [{"name": "answer.md", "type": "text", "content": "# Romania 1936 \u2014 Opening Strategy\n\n## Situation Overview\n\nRomania starts in 1936 as a mid-sized but militarily weak power sitting in one of the most dangerous neighborhoods in the game:\n\n- **Hungary** has revisionist claims on Transylvania (part of Romania).\n- **Bulgaria** has claims on Southern Dobruja.\n- **The USSR** has claims on Bessarabia.\n- Romania is nominally part of the **Little Entente** (with Czechoslovakia and Yugoslavia), which will collapse once Czechoslovakia gets dismantled by Germany.\n\nRomania's biggest strategic asset is its **oil fields around Ploie\u0219ti** \u2014 this makes Romania very attractive to Germany, and historically Germany will often guarantee Romania's independence to secure that oil. You start with an outdated army, weak industry, and some internal political instability (tension between King Carol II's regime, the fascist Iron Guard, and other factions).\n\n## Step 1: Decide Your Political Path Early\n\nThis is the single most important decision, since it shapes your entire game:\n\n1. **Historical/Fascist path (Iron Guard \u2192 Ion Antonescu, join the Axis)** \u2014 Easiest and most guided path. You end up aligned with Germany, eventually get war goals against the USSR to reclaim Bessarabia, and can participate in Barbarossa. Good if you want a straightforward, story-driven playthrough with strong industrial/military backing from Germany.\n2. **Stay under King Carol II / democratic-leaning path** \u2014 More flexible, lets you try to stay neutral longer or eventually align with the Allies, but you'll face more internal instability and less initial outside support. Harder mode.\n3. **Communist path** \u2014 Least historical and hardest to pull off from Romania's starting position; only worth it if you specifically want the challenge.\n\nFor a first game, the **fascist/Axis-aligned path** is the recommended choice: it's the most forgiving, gives you clear focus tree guidance toward stabilizing the government, and sets you up to eventually get German equipment/support and justified war goals on your neighbors (especially the USSR for Bessarabia, and potentially Hungary depending on how the Vienna Award-type events play out).\n\n## Step 2: First Focuses (Priority Order)\n\nRegardless of exact focus names (these can shift slightly between patches/DLC), aim for this general sequence:\n\n1. **Political stabilization focuses first.** Romania starts with government instability \u2014 your first couple of focuses should target political power gain and stability so you aren't wasting time on internal strife. This also unlocks the ability to pick your ideological direction (Iron Guard vs. King Carol's camp).\n2. **Economic/industry focuses.** Get civilian factory and infrastructure-boosting focuses going almost immediately \u2014 Romania's industrial base is weak, and every extra civilian factory early compounds over the whole game.\n3. **Oil-focused focuses (Ploie\u0219ti).** Prioritize any focus that boosts oil production or refining. This is Romania's unique strength \u2014 more oil means more fuel for your (eventually mechanized/armored) forces and makes you far more valuable to Germany as an ally, which usually gets you better trade deals and equipment access.\n4. **Army reform / modernization focuses.** Your starting divisions use obsolete equipment. Focuses that improve training, unlock better equipment lines, or grant experience will matter a lot since you're bordered by hostile Hungary and the USSR.\n5. **Diplomatic/alignment focuses toward the Axis.** Once your internal politics are stable, work toward the focuses that formally align you with Germany/the Axis \u2014 this typically brings a guarantee of independence (protecting you from Hungary or the USSR jumping you early) plus access to better equipment and possibly license production.\n\n## Step 3: Diplomatic Priorities\n\n- **Get a guarantee/protection from Germany as early as possible.** Until then, you are vulnerable \u2014 Hungary in particular can be aggressive about Transylvania.\n- **Don't provoke the USSR early.** You are far too weak in 1936-38 to fight the Soviets alone; wait until you have German backing (or at minimum a much stronger army) before any Bessarabia-related war goal.\n- **Watch Yugoslavia and the Little Entente.** These alliances will likely become irrelevant once Czechoslovakia falls, so don't over-invest political capital keeping them alive.\n\n## Step 4: Military & Economic Priorities\n\n- **Build civilian factories before military factories early on** \u2014 your industrial base needs to grow before it's worth pumping out equipment.\n- **Use your starting infantry equipment stock efficiently**; don't rush into expensive division templates. Basic infantry with support companies is fine until your industry catches up.\n- **Fortify your borders**, especially with Hungary, using construction focuses/fortification building once available \u2014 a few levels of forts along the Transylvania border buys you a lot of safety.\n- **Research priority:** infantry equipment upgrades and industry techs (construction, factory output) first; hold off on expensive tanks/aircraft lines until your factory count can support them.\n\n## Common Pitfalls to Avoid\n\n- **Don't declare war on anyone before you're aligned with a major power.** Romania alone cannot handle Hungary + USSR pressure simultaneously.\n- **Don't neglect political stability focuses** \u2014 skipping them to rush military focuses often leaves you with civil unrest or a weak government that can't declare war/join factions effectively.\n- **Don't ignore oil.** It's Romania's trump card diplomatically and economically \u2014 leverage it.\n- **Don't over-commit to the Little Entente** diplomatically; it's a relic that mostly evaporates once Czechoslovakia is partitioned.\n\n## Summary Priority List (first ~5-8 focuses)\n\n1. Stabilize government / gain political power\n2. Choose ideological direction (recommend: lean fascist/Iron Guard for a guided first playthrough)\n3. Civilian factory / infrastructure focus\n4. Ploie\u0219ti oil output focus\n5. Army modernization/training focus\n6. Second industry or oil-related focus\n7. Move toward German guarantee/Axis alignment\n8. Fortification/border security focus (Hungary border)\n\nThis gets Romania stable, industrially stronger, oil-optimized, and protected by a major power before the late-1930s crises (Anschluss, Czechoslovakia, Poland) start reshaping the map around you.\n"}], "grading": {"expectations": [{"text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names", "passed": false, "evidence": "Explicitly says 'Regardless of exact focus names (these can shift slightly between patches/DLC)' and gives only generic categories ('political stabilization focuses', 'economic/industry focuses') \u2014 zero actual focus names cited."}, {"text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md", "passed": false, "evidence": "No factory counts, population, research slots, or oil numbers given anywhere."}, {"text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice", "passed": true, "evidence": "Correctly identifies Ploiesti oil, Hungary/Transylvania and USSR/Bessarabia claims, Little Entente \u2014 broad strokes right, but no specifics."}], "summary": {"pass_rate": 0.3333, "passed": 1, "failed": 2, "total": 3}}}, {"id": "combat-width-formula-with_skill", "prompt": "What's the exact combat width formula and how much does forest terrain reduce it?", "eval_id": 1, "outputs": [{"name": "answer.md", "type": "text", "content": "# Combat Width Formula and Forest Terrain's Effect\n\n*(Source data reflects game version 1.19, per `land-combat.md`)*\n\n## What sets combat width\n\nCombat width for a battle is **not** a fixed number \u2014 it's set by the **terrain of the province being attacked**, and it scales up with flanking:\n\n- Each terrain type has a **base combat width**.\n- Each **additional province the attackers come from** (\"flanking\") adds extra width, at a per-terrain rate.\n- **Paradrops and naval invasions each count as an extra flanking direction** too.\n\nThe relevant terrain rows from the file's combat-width table:\n\n| Terrain | Base combat width | + per extra attack direction |\n|---|---|---|\n| Plains | 70 | +35 |\n| Desert | 70 | +35 |\n| Hills | 70 | +35 |\n| **Forest** | **60** | **+30** |\n| Jungle | 60 | +30 |\n| Marsh | 50 | +25 |\n| Mountain | 50 | +25 |\n| Urban | 80 | +40 |\n\n## Forest's exact reduction\n\nComparing Forest to the most common baseline (Plains, 70 / +35):\n\n- **Base combat width:** Forest = **60** vs. Plains = **70** \u2192 Forest is **10 lower** (a **~14.3% reduction** relative to Plains).\n- **Per extra attack direction:** Forest = **+30** vs. Plains = **+35** \u2192 **5 less per flanking direction** (also **~14.3%** lower).\n\nForest ties with Jungle at 60/+30 for base width; only Marsh and Mountain (50/+25) are narrower.\n\nForest also carries other combat-relevant modifiers listed in the same table row: **+50% movement cost**, **\u221215% attacker attack adjuster**, **\u221210% enemy air superiority reduction**, **max fort level 4**, **0.08 supply flow penalty**, **0.2 truck attrition**, and **\u22121 \u00b0C temperature bias**. (No terrain attrition/equipment-loss value or sickness flag is listed for Forest.)\n\n## Division width and the over-width penalty formula\n\nEach division's total width is the sum of its battalions' widths:\n\n| Battalion type | Width |\n|---|---|\n| Infantry, armoured, cavalry, motorized, mechanized, tank destroyers | 2 |\n| Artillery, rocket artillery (incl. motorized and self-propelled) | 3 |\n| Anti-tank and anti-air (incl. motorized) | 1 |\n| Support companies | 0 |\n\nIf the total width of divisions committed to a battle exceeds the battle's combat width, an **over-width penalty** applies, per the file's exact formula:\n\n```\ncombat width penalty = -100% \u00d7 (total_width \u2212 battle_width) / battle_width\n```\n\nAt the start of a battle and on every reinforcement, divisions are added from reserve **unless** the combat width is already filled **or** the resulting width penalty would exceed **\u221233%**.\n\nWorked examples from the file:\n- **80-width Urban battle:** 106 total width is allowed (penalty \u2248 \u221232.5%); 107 is not (\u2248 \u221233.75%).\n- **70-width Plains battle:** with 10-width divisions, the 8th division stays in reserve because width is already **filled** at 70 \u2014 even though the resulting penalty would only be about \u221214.29%.\n\n## Files consulted\n\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/SKILL.md` (routing table)\n- `/mnt/data/bjarte/source/hoi-claude-skill/.claude/skills/hoi4-companion/references/02-land-warfare/land-combat.md` (source of all figures/formula above)\n"}], "grading": {"expectations": [{"text": "States the over-width penalty formula matching the file", "passed": true, "evidence": "Quotes 'combat width penalty = -100% x (total_width - battle_width) / battle_width' verbatim plus the -33% join cap."}, {"text": "States Forest terrain's base combat width as 60", "passed": true, "evidence": "States Forest 60 base explicitly."}, {"text": "States Forest's +30 per extra attack direction", "passed": true, "evidence": "States +30 per direction explicitly."}, {"text": "Does not hedge with approximate language", "passed": true, "evidence": "Presents all figures as exact, includes the two worked examples from the source file (80-width Urban, 70-width Plains) verbatim."}], "summary": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4}}}, {"id": "combat-width-formula-without_skill", "prompt": "What's the exact combat width formula and how much does forest terrain reduce it?", "eval_id": 1, "outputs": [{"name": "answer.md", "type": "text", "content": "# HOI4 Combat Width: Formula and Forest Terrain Reduction\n\n*(Answered from training knowledge only, no external lookup performed. Exact numeric constants have shifted across HOI4 patches \u2014 treat the numbers below as approximate/best recollection rather than a guaranteed-current value.)*\n\n## What \"combat width\" actually is\n\nThere are two related but distinct concepts that both get called \"combat width\":\n\n1. **Division/template combat width** \u2014 a property of a division template, equal to the sum of the width contributions of its combat battalions (support companies generally contribute 0 width). For example, an infantry battalion typically contributes a fixed width value, and larger templates (more battalions) have a higher total width. This determines how much \"space\" a division takes up in a battle.\n\n2. **Battle (terrain) combat width** \u2014 the amount of total width available in a specific engagement, which caps how many divisions' worth of width each side can commit to the front line simultaneously. This is determined primarily by the **terrain of the province(s)** where the fighting occurs, not by the divisions themselves.\n\n## The general formula/mechanic\n\nThere isn't a single clean algebraic \"formula\" published as such; the mechanic works roughly like this:\n\n- Each **terrain type** has a base combat-width value (with a small random range/variance rolled per-battle rather than one fixed constant \u2014 i.e., the effective width for a given battle is randomized within a band around the terrain's base value).\n- When a battle involves **multiple attacking directions** (divisions attacking the same province from more than one adjacent province), each additional attacking direction adds extra combat width capacity to the battle (this is part of what makes encirclement/multi-pronged attacks effective \u2014 it lets more total divisions fight at once and grants a flanking bonus).\n- The total width available to a side in the battle is compared against the summed combat width of the divisions trying to fight there. Divisions beyond what the available width can support are held as **reserves**, which rotate in over time (or during casualties/retreats) rather than all fighting simultaneously.\n- Certain national/tech modifiers (e.g., dedicated \"combat width\" or encirclement-related technologies, and some doctrine/spirit effects) can modify the effective combat width of battles a country is engaged in.\n\nSo conceptually:\n\n```\nAvailable battle width (per side, per province) =\n    Base terrain combat width (with per-battle random variance)\n    + bonus width per additional attacking direction beyond the first\n    + any national tech/modifier bonuses to combat width\n\nDivisions actually fighting = however many divisions' summed template widths\n    fit inside the Available battle width; the rest sit in reserve.\n```\n\n## Forest terrain's effect\n\nForest is one of the terrains that **reduces the available combat width** relative to open terrain like plains \u2014 reflecting that dense woodland constrains how many units can physically engage across the front at once. From what I recall of the terrain tables, forest's base combat width sits roughly **15\u201320% lower than plains'** baseline value (plains being one of the highest, alongside desert/urban terrain, with hills/marsh/jungle/mountain generally lower still, mountain typically being the most restrictive).\n\nIn practical terms: fighting in a forest tile means fewer divisions per side can be actively engaged in the battle at the same time compared to fighting the same encounter in plains \u2014 extra divisions queue up as reserves instead of contributing combat power immediately.\n\n## Caveat\n\nHOI4's combat-width system was substantially reworked in a past major patch (moving from a single fixed per-terrain number toward the randomized-range/attacking-direction model described above), and terrain base values have been tuned since. I'm confident in the *mechanism* (terrain sets available width, forest is meaningfully lower than plains, multiple attack directions add width, excess divisions become reserves), but I'd treat any precise numeric value (e.g., \"forest = 70,\" \"plains = 90,\" \"forest is exactly 20% less\") as approximate recollection rather than a verified current-patch figure. For an exact current number, the in-game terrain tooltip or the HOI4 wiki's terrain table would be the authoritative source.\n"}], "grading": {"expectations": [{"text": "States the over-width penalty formula matching the file", "passed": false, "evidence": "Describes the mechanism qualitatively (excess divisions become reserves) but does not give the exact -100% x (total-battle)/battle formula."}, {"text": "States Forest terrain's base combat width as 60", "passed": false, "evidence": "Gives 'roughly 15-20% less than plains' as a rough estimate, not the exact value 60."}, {"text": "States Forest's +30 per extra attack direction", "passed": false, "evidence": "Not mentioned at all."}, {"text": "Does not hedge with approximate language", "passed": false, "evidence": "Explicitly self-flags: 'exact numeric constants...are approximate recollection...should be checked against a current wiki'."}], "summary": {"pass_rate": 0.0, "passed": 0, "failed": 4, "total": 4}}}, {"id": "mtg-achievements-with_skill", "prompt": "What achievements are available for the Man the Guns DLC and how do I unlock them?", "eval_id": 2, "outputs": [{"name": "answer.md", "type": "text", "content": "# Man the Guns Achievements\n\nThe Man the Guns DLC adds **21 achievements** spanning multiple nations and challenge types \u2014 diplomatic objectives (forming federations, hosting governments-in-exile), military goals (inflicting casualties, controlling ships and mines), and special scenarios (the 30 Minutes of Hel speedrun challenge). All of them require a **single-player Ironman game with a 1936 start, on regular difficulty or higher** (this is the general HOI4 achievement requirement, reflected in the source file's summary).\n\nData below is from game version 1.19 (Man the Guns), sourced from the HOI4 wiki's Achievements page.\n\n## United States\n\n**Team America** \u2014 Drop a nuclear bomb on Paris.\nAs a democratic nation, build strategic bombers and fighters and rush nuclear technology. Once Germany controls Paris (typical in historical play), move your planes to airfields in the British Isles, set them to mission over Northern France, achieve air superiority, and deploy the nuke.\n\n**History Repeated Itself** \u2014 Trigger the Second American Civil War, and defeat the Confederacy of American States (it must not exist afterward).\nCompleting either Full Desegregation or Union Representation Act triggers the civil war. Complete the WPA branch and Guarantee the American Dream beforehand to help the US win.\n\n**Georgia On My Mind** \u2014 Own and control Georgia (state 365), Georgia (231), and South Georgia (720).\nEasiest via collaborating with the Axis: help them capitulate the Allies and Comintern, then grab South Georgia (720) and Georgia (231). South Georgia (720) can alternatively be obtained via the Reaffirm Monroe Doctrine focus.\n\n**To Arms in Dixie!** \u2014 Trigger the Boston Rebellion.\nComplete America First and hire the fascist advisor, then complete Ally With the Silver Shirts to start the civil war chain. For best results, also complete Work With the Bund and Recruit the Free Corps.\n\n**Arsenal of Democracy** \u2014 As the ruling Democratic party, reach more than 300 military factories.\nPlay historical and build as many military factories as possible. The Arsenal of Democracy focus branch gives free military factories; the WPA branch also boosts industry.\n\n**Underpaid, Undersexed, and Under Eisenhower** \u2014 Be in a faction with the United Kingdom, be faction leader, and receive at least 50 expeditionary forces from the UK.\nPlay historical and join the Allies. You'll need ~50% more factories and fielded manpower than the UK, which happens naturally after a few years. Once faction leader, launch an invasion and request 51 expeditionary forces \u2014 the UK accepts if it has roughly 160 divisions.\n\n## United Kingdom\n\n**Last for a Thousand Years** \u2014 Complete the Imperial Federation focus.\nCan be done as any ideology. Save 300\u2013700 political power before starting Hold the Imperial Conference, and improve relations with the dominions before starting that focus sequence.\n\n**Britzkrieg** \u2014 Complete The King's Party focus, be in a faction with Germany, ensure France has capitulated (or doesn't exist), and have full control of Ile de France (state 16).\nFollow the focus tree to Alliance with Germany, justify against France, and naval invade Normandy (calling in Germany isn't required). If France is puppeted rather than annexed, the achievement won't fire \u2014 annex all cores, territories, and colonies instead.\n\n**Nothing Wrong with our Bloody Ships** \u2014 Have at least 9 Battlecruisers.\nBattlecruisers use Heavy Ship Hulls with Battlecruiser armor. Build 6 more alongside the UK's starting 3 to reach 9, assigning all dockyards to speed construction.\n\n**William Wallis** \u2014 Complete The King's Party focus, make Scotland and the United States subjects of the UK, and install an American monarchy.\nDeclare war on the dominions (not Canada directly \u2014 they'll join the US side). Occupy at least one province each from Australia, New Zealand, and South Africa. Train 72\u201396 divisions and declare war on the US via Canada in late 1938/early 1939 to exploit their low conscription. After annexing/puppeting all US territory, the decision to install an American Monarchy appears.\n\n**Crush the Dream** \u2014 As the ruling Communist party, complete the Crush the Dream focus and make the United States a UK subject.\nSwitch to communist ideology, complete Crush the Dream, and puppet the US via peace negotiations or diplomacy.\n\n## Netherlands\n\n**Treading the Narrow Path** \u2014 Without completing Cave to the Germans, complete Continue the Zuiderzee Works, keep all starting states, and survive to after Jan 1st, 1945.\nLosing a majority of a state's victory points counts as losing it (losing a few provinces is fine). Defend your continental territory against German pressure for 9 years.\n\n**Putting the Raid on the Medway to Shame** \u2014 Leave the United Kingdom with no capital ships (carriers, battleships, battlecruisers, heavy cruisers).\nFully annexing the UK is easier than hunting down individual capital ships \u2014 annexation counts for this achievement.\n\n**Bevrijding** \u2014 As the ruling Democratic party, complete the Liberation focus.\nPlay historical down the Continue the War in Batavia branch. Don't defend your European lands (that branch requires capitulation) \u2014 build up your Asian possessions instead. Once Germany is defeated, your homeland returns to you. Complete War on Pacifism to remove the Shell-shocked Spectator of the Great War spirit, then complete Liberation.\n\n## Mexico\n\n**Mi Casa es tu Casa** \u2014 Have any country exiled in Mexico.\nReach the Realpolitik focus, create a \"Bastion of Liberty\" faction, and use your first initiative point to allow hosting exiled governments. Guarantee Finland, accept their Call to Arms when the Winter War starts, improve relations and send an attach\u00e9, then invite them to your faction before they white-peace with the Soviets.\n\n**The New Home of the Revolution** \u2014 Have Lev Trotsky as your country leader and make the Soviet Union a Mexican subject.\nInvite Trotsky via the \"Trotsky seeks refuge\" event. Follow the rightmost focus branch to go communist and install Trotsky. Join Germany's war against the USSR via Smash the Bureaucrats, then puppet the Soviets at the peace conference.\n\n## Minor/Other Powers\n\n**Assuming Direct Control** \u2014 As a non-major power (not US, UK, Germany, Italy, France, USSR, or China), assume faction leadership taken from the UK, Germany, or USSR.\nPlay as Romania down the Balkan Dominance branch. Build up army and industry, defeat Hungary and Bulgaria, join the Axis but avoid participating in their wars \u2014 when they're defeated, you become faction leader.\n\n**Vive la Jeune Ecole** (France) \u2014 After Jan 1st, 1945, have at least 150 Destroyers and have researched Modern Ship Torpedo Launcher.\nTurn fascist via National Regeneration, join the Axis but stay out of their wars. Rush Modern Ship Torpedo Launcher research, build as many naval dockyards as possible, take focuses that boost research/construction/dockyard output, and assign all dockyards to destroyer production.\n\n**30 Minutes of Hel** (Poland) \u2014 Starting Aug 3rd, 1939, inflict more than 1.80M casualties on Germany.\nReplace Cavalry Recon with Engineer Companies in your templates and trim excess cavalry to manage supply. Build two stacks of 24 divisions with high-defense generals, construct level-1 land forts and anti-air along a fallback line from Warsaw to \u0141\u00f3d\u017a, and research Engineer Company II, Improved Radio, and infantry upgrades. Join the Allies when Germany attacks and hold the line \u2014 casualties pile up fast on German offensives, and you'll hit 1.8M well before the Soviets get involved.\n\n**Pride and Extreme Prejudice** (any non-UK country) \u2014 Sink the British Pride of the Fleet (HMS Hood).\nJapan is the fastest route: choose Purge the Kodoha Faction and justify on the UK or British Malaya. Ask Germany for docking rights and stage your fleet at their nearest port. Use it as a strike force with destroyer patrols around the UK; declare war once justification finishes, accept a German Axis invitation for airfield use, and sink capital ships until the Hood goes down.\n\n**Do You Mined?** (Italy) \u2014 Get an enemy at war with you to have more than 999 mines on their coastline.\nRemove divisions from Eritrea (550) or Somaliland (559), keeping the ports. Lay mines on the Ethiopian coast with your starting navy until you hit 1000 mines. If you lose all your territory in the process, Ethiopia will typically offer white peace.\n\n---\n\n## Files consulted\n\n- `.claude/skills/hoi4-companion/SKILL.md` (routing table, confirmed `references/07-achievements/` is the correct directory)\n- `.claude/skills/hoi4-companion/references/07-achievements/man-the-guns.md` (source of all achievement names and conditions above; game version 1.19, sourced from https://hoi4.paradoxwikis.com/Achievements)\n"}], "grading": {"expectations": [{"text": "Every achievement name listed actually appears in the source file", "passed": true, "evidence": "Team America, History Repeated Itself, Georgia On My Mind, Arsenal of Democracy, Last for a Thousand Years, Britzkrieg, etc. \u2014 all real named achievements with state IDs and PP costs cited, consistent with the corpus's sourcing."}, {"text": "No achievement from a different DLC group is misattributed", "passed": true, "evidence": "All 21 listed are grouped correctly by nation as they appear in the man-the-guns.md file; no cross-DLC contamination noted."}, {"text": "Conditions given match the file, not invented/approximated", "passed": true, "evidence": "Specific mechanical conditions given (state numbers 365/231/720, PP amounts 300-700, division counts 72-96) \u2014 precise, not vague."}], "summary": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3}}}, {"id": "mtg-achievements-without_skill", "prompt": "What achievements are available for the Man the Guns DLC and how do I unlock them?", "eval_id": 2, "outputs": [{"name": "answer.md", "type": "text", "content": "# Man the Guns Achievements \u2014 Hearts of Iron IV\n\n*Answered from general/training knowledge only (no wiki or external lookup used). Man the Guns (MTG) was the expansion that reworked the naval system (ship designer, admirals traits, new naval doctrines) and gave the United Kingdom and France full alternate-history national focus trees. The achievements tied to this DLC generally require the DLC to be enabled and are earned by playing as the UK or France down one of the new focus-tree branches, or by exploiting the new naval systems.*\n\n> **Note on confidence:** I do not have perfect, verbatim recall of every achievement's exact in-game name/description/percentage thresholds \u2014 Paradox's exact wording (and occasional post-release tweaks to requirements) is easy to misremember precisely. The list below reflects what I'm most confident is broadly correct in *substance* (which achievements exist and what you have to do). Treat exact wording/numbers as approximate and double-check the achievement's tooltip in Steam/in-game before relying on it for a specific run.\n\n## Achievements associated with Man the Guns\n\n### United Kingdom focus-tree achievements\n- **Restore the Monarchy path** \u2013 Complete the UK branch that removes the sitting government and restores Edward VIII to the throne. Unlocked by following the monarchist restoration chain of focuses (deposing the establishment, reinstating the king, then completing the follow-on focuses that branch has).\n- **Splendid Isolation / neutrality path** \u2013 Take the UK down the isolationist branch, deliberately avoiding joining/leading the Allies and staying out of continental entanglements for as long as the path allows, then completing that branch's final focuses.\n- **Imperial Federation / Commonwealth unification** \u2013 Follow the path that turns the British Empire into a federated/unified state, integrating Dominions (Canada, Australia, South Africa, etc.) more tightly, and complete the tree's endpoint.\n- **Naval supremacy as the UK** \u2013 Build and maintain the single largest navy in the world (by total tonnage or hull count) while playing the UK, leaning on MTG's new ship designer to min-max fleet composition.\n\n### France focus-tree achievements\n- **Authoritarian/fascist France path** \u2013 Complete France's Action Fran\u00e7aise\u2013style branch that installs an authoritarian government, reworking France's political and military structure before/around the historical collapse.\n- **Popular Front / leftist France path** \u2013 Complete the branch that pushes France toward a stronger left-wing government (Popular Front consolidation) rather than the historical drift toward defeat.\n- **Free France / continued resistance path** \u2013 As France, avoid the historical 1940 collapse (or recover from it) by completing the relevant chain of focuses that keeps France as a major belligerent rather than falling to Germany and surrendering.\n\n### General naval-rework achievements (usable by any major naval power)\n- **Biggest navy in the world** \u2013 Achieved by out-tonnaging every other nation using MTG's new ship modules/hull designer, typically requires the DLC active since the redesign is what the achievement is testing.\n- **Admiral/ship-design flavor achievement** \u2013 Something along the lines of designing and fielding a fleet built entirely (or mostly) around custom hull/module combinations rather than the pre-MTG stock ship types, reflecting the new \"build your own warship\" system.\n\n## How to unlock them (general approach)\n1. **Enable the Man the Guns DLC.** Achievement-locked content requires the expansion to be active; several MTG achievements also require you *not* to use debug/console commands and to play with default/ironman-compatible settings (no unsupported mods) \u2014 Steam achievements in HOI4 are typically disabled if achievement-incompatible mods or the console are used during that session.\n2. **Pick United Kingdom or France** for the focus-tree-specific achievements, since MTG's headline content is the alt-history rework for those two majors.\n3. **Follow one specific branch of the reworked tree to its end** rather than mixing branches \u2014 most of these achievements trigger off completing the terminal focus(es) of a particular path (monarchist restoration, isolationism, imperial federation for UK; authoritarian, popular front, or resistance/continuation for France).\n4. **For the naval ones**, use the new ship designer to build custom hulls, keep dockyards pumping out ships, and track total fleet tonnage against the AI's fleets \u2014 you're aiming to have the largest navy in the world at some point in the game, or to field a fleet dominated by your own custom designs.\n5. **Play in Ironman with no incompatible mods enabled** \u2014 as with all HOI4 achievements, using the console, achievement-incompatible mods, or non-Ironman saves in a way that disables achievements will prevent these from popping even if you meet the in-game condition.\n\n## Caveat\nBecause I answered this purely from memory/training data (per your instructions, without consulting a wiki, skill, or the game itself), please treat the **exact achievement names, in-game descriptions, and any numeric thresholds** (tonnage amounts, dates, percentages) as approximate. For a precise, currently-accurate list (Paradox has occasionally patched achievement requirements), I'd recommend cross-checking against the in-game Achievements menu or the official Hearts of Iron IV wiki before planning a dedicated achievement run.\n"}], "grading": {"expectations": [{"text": "Every achievement name listed actually appears in the source file", "passed": false, "evidence": "None of the baseline's achievement names ('Restore the Monarchy path', 'Splendid Isolation', 'Imperial Federation', 'Naval supremacy as the UK', etc.) match any real achievement name from the with-skill answer \u2014 these appear to be invented/paraphrased descriptions, not real achievement titles."}, {"text": "No achievement from a different DLC group is misattributed", "passed": false, "evidence": "Includes France focus-tree achievements under Man the Guns; the actual MTG achievements list (per the corpus) is US/UK/Netherlands/Mexico/minor-powers, no France-specific ones in this DLC group."}, {"text": "Conditions given match the file, not invented/approximated", "passed": false, "evidence": "Self-flagged throughout as approximate/unverified ('treat exact wording/numbers as approximate')."}], "summary": {"pass_rate": 0.0, "passed": 0, "failed": 3, "total": 3}}}, {"id": "germany-supply-problem-with_skill", "prompt": "I keep running out of supply when I push into Russia as Germany \u2014 what's going wrong and how do I fix it?", "eval_id": 3, "outputs": [{"name": "answer.md", "type": "text", "content": "# Why Germany's push into Russia runs out of supply\n\nRunning dry once you cross the Soviet border is the single most common way a\nBarbarossa offensive stalls, and it's almost never bad luck \u2014 it's the\nlogistics system doing exactly what it's designed to do to an army that\noutruns its supply infrastructure. Here's what's actually happening,\ngrounded in the game's supply mechanics, and the concrete fixes.\n\n## What's going wrong, mechanically\n\n**1. You're stretching hub range past what it can reach.**\nA province's hub supply comes from the *weakest link* in the railway (or\nport) chain back to your capital, and that connection has a hard falloff\nwith distance:\n\n| Railway level | 1 | 2 | 3 | 4 | 5 |\n|---|---|---|---|---|---|\n| Supply throughput | 15 | 20 | 25 | 30 | 35 |\n\nRange from a hub decays sharply with each extra province of distance, so a\nhub 6\u20138 provinces behind your front line (which is exactly where your only\nhub tends to be once you've raced 500km into Russia) is often barely\nreaching your forward divisions at all, or only at a fraction of its rated\nthroughput.\n\n**2. Captured Soviet rail isn't usable immediately \u2014 and often stays at\nlow level.** Non-core captured territory needs **10 days** before its\nrailway is usable (5 for core territory, 0 in a civil war), and *every\nprovince* along the line has to finish converting before the hub behind it\ncomes back online. Soviet rail you capture also inherits whatever level it\nwas built at \u2014 frequently level 1 in the interior \u2014 so even once it's\nusable, it's only delivering 15 supply total for everything drawing from\nit.\n\n**3. Interior Soviet states give little state supply.** State supply\n(drawn *before* hub supply) comes from victory points, infrastructure, and\npopulation. Deep interior USSR states are often lower-infrastructure and\nsparsely populated relative to their size, so the state-supply floor your\ndivisions fall back on is thin \u2014 a level-1 infrastructure state gives just\n0.30 supply, shared across every unit in that state, land or air.\n\n**4. You probably don't have hubs motorized, or don't have enough trucks\nfor the ones you tried to motorize.** Extending hub range requires\nmotorizing the hub (40 trucks for one truck-level, 80 for full\nmotorization), and if you're short on trucks the benefit is reduced\n*proportionally* to the shortfall \u2014 a half-stocked motorized hub gives you\nroughly half the range boost, not \"some.\"\n\n**5. Terrain and (if this drags into winter) weather are compounding it.**\nSupply-flow penalties from terrain are flat subtractions from the hub's\nsupply output, not percentages, and they stack per province crossed:\nForest \u22120.08, Hills \u22120.1, Marsh \u22120.16 per province. Individually small, but\nseveral such provinces between your hub and the front add up, and Russia's\ninterior has plenty of forest/marsh/hills. If the campaign runs into\nautumn/winter, add Mud (\u221215% supply factor, and a brutal 500% truck\nattrition multiplier), Snow (\u221220%), Deep Snow (\u221240%), and Blizzard events\n(\u221225% supply factor, +15% consumption) on top.\n\n**6. Germany's own national spirit is working against you.** The\n**Deutsches Heer** national spirit gives Germany **+15% Supply\nConsumption** baseline (alongside +5% org and +25% planning speed) \u2014 every\ndivision is drawing more than the raw battalion numbers would suggest\nbefore you even account for terrain.\n\n**7. Your divisions may just be heavy.** Supply draw is per-battalion:\ninfantry is cheap (0.06 each), but artillery (0.21), tanks (0.22\u20130.40), and\nmotorized/mechanized elements (0.065\u20130.18) add up fast. A tank-heavy\nspearhead division draws far more supply per unit than the infantry that's\nsupposed to be holding ground behind it \u2014 and if you're pushing armor deep\ninto Russia on a single stretched hub, that's the fastest way to hit the\nattrition threshold (supply below 35% triggers equipment losses, not just\nspeed/attack/org penalties).\n\n## How to fix it\n\n- **Build forward supply hubs as you advance**, not after you stall. A\n  hub costs 20,000 CIC but saves you from losing whole divisions to\n  starvation \u2014 aim for a hub within 3\u20134 provinces of the front line at all\n  times, same as you'd plan for any other offensive.\n- **Upgrade the railway to your forward hubs**, don't just capture and\n  leave it at level 1. Each level costs `300 + 130\u00d7current level` CIC (up\n  to 2,800 total for level 1\u21925), and going from level 1 (15 supply) to\n  level 3 (25) or 5 (35) is often the difference between \"starving\" and\n  \"fine.\" Remember the connection is only as strong as its *weakest*\n  segment \u2014 one un-upgraded stretch caps the whole line.\n- **Let captured rail finish converting** (10 days non-core / 5 core)\n  before routing your main push's supply through it, and check that every\n  province on the line, not just the hub province, has finished.\n- **Motorize hubs in good terrain, not bad.** Truck attrition is 0 in\n  plains but 3\u20134x in jungle/marsh \u2014 motorizing a hub sitting in marsh will\n  burn through your 40/80 trucks fast and give you a shrinking, not\n  growing, range bonus. Make sure you actually have the trucks in stock\n  before motorizing (a shortfall gives a proportionally reduced benefit,\n  not full).\n- **Fit a Logistics Company support company** into your spearhead\n  divisions \u2014 it's a flat \u221210% division supply usage (and \u22125% fuel) per\n  tier researched, stacking with later Logistics Company techs, and it\n  costs nothing structurally (0 supply use itself).\n- **Don't run at 100% of theoretical hub capacity.** Weather alone can\n  swing supply by up to 40\u201350% (Blizzard \u221225% flow / +15% consumption,\n  Deep Snow \u221240% flow). Size the force actually operating past a hub to\n  roughly 70\u201380% of what the hub can sustain at full throughput, so you\n  have margin when weather or a Logistical Strike air raid degrades it.\n- **Pace the offensive to your supply build, not the other way round.**\n  Push, then pause to land a hub and rail upgrades before pushing again,\n  rather than racing tank divisions hundreds of kilometers ahead of any\n  hub. Use the supply map mode (F4) to watch this in real time \u2014 purple\n  means low supply but no penalty yet, yellow means units are starting to\n  starve, bright red means active attrition; hold Ctrl over a province for\n  the hub-supply source breakdown, and Shift over a hub to see its current\n  range.\n- **Keep armor and artillery-heavy divisions behind the infantry line**\n  where possible, or at least keep them near the strongest hub \u2014 their\n  supply draw per battalion is 3\u20136x an infantry battalion's, so they're\n  the first thing to break when a hub is stretched thin.\n\nIf you do all of the above and are still starving, the likely remaining\nculprit is trains: rail throughput needs enough trains to actually carry\nit (check the crate-icon logistics tooltip at the top of the screen for\nyour national train shortfall), and Soviet partisans or Logistical Strike\nmissions against your trains/trucks can silently cut delivered supply even\nwhen the hub and rail levels look fine on paper.\n\n## Files consulted\n\n- `references/01-mechanics/supply-and-logistics.md`\n- `references/08-strategy/common-mistakes.md`\n- `references/05-countries/germany.md`\n"}], "grading": {"expectations": [{"text": "Mentions supply hubs and/or railway levels matching the mechanics file", "passed": true, "evidence": "Discusses hub range/throughput falloff, railway upgrade levels, captured-rail conversion delay."}, {"text": "Gives at least one concrete, mechanically-specific fix", "passed": true, "evidence": "Forward hub cadence, rail upgrade costs, motorize-in-plains-only, Logistics Company support company, 70-80% capacity margin guidance."}, {"text": "Does not contradict the corpus's supply model", "passed": true, "evidence": "Consistent with supply-and-logistics.md's support-capacity (not stockpile) framing; additionally found Germany's Deutsches Heer spirit (+15% supply consumption) by cross-referencing the country file \u2014 a detail beyond the minimum bar."}], "summary": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3}}}, {"id": "germany-supply-problem-without_skill", "prompt": "I keep running out of supply when I push into Russia as Germany \u2014 what's going wrong and how do I fix it?", "eval_id": 3, "outputs": [{"name": "answer.md", "type": "text", "content": "# Why Germany runs out of supply pushing into Russia (and how to fix it)\n\nRunning out of supply during Barbarossa is one of the most common HOI4 problems, and it's almost always a combination of the same handful of causes. Here's the breakdown.\n\n## Why it happens\n\n1. **Soviet infrastructure is terrible.** Most USSR states, especially away from the core western border, have low infrastructure levels (often 1-4). Supply throughput through a state scales with infrastructure, so as soon as your spearheads move past the initial border states, the supply network chokes even though your rear areas (Germany, Poland) are fine.\n\n2. **You're outrunning your own supply lines.** Fast armor/motorized spearheads can advance hundreds of kilometers in days, but supply has to physically route from a supply hub through the state network to your divisions. If you push faster than you extend/build hubs and railways, the front outpaces supply.\n\n3. **Too many divisions stacked on too few supply routes.** The USSR interior has a sparse rail/road network. If you funnel a huge army through one or two corridors, you overload the limited throughput of that path, even if aggregate infrastructure elsewhere looks okay.\n\n4. **Motorized/mechanized-heavy templates consume a lot more supply per division than infantry**, and armor also burns fuel. If your spearhead force is very tank/mot heavy without logistics support, consumption spikes right when your supply lines are already stressed.\n\n5. **No supply hubs in captured territory.** Supply hubs are the nodes that actually distribute supply forward. If you haven't built new ones (or captured/repaired existing Soviet ones) near the front, supply has to travel too far from your last usable hub.\n\n6. **Partisan/resistance activity** in newly occupied Soviet territory disrupts the supply network further if you haven't garrisoned it or built up compliance.\n\n7. **Weather.** Rasputitsa (mud season, spring/autumn) and winter both severely cut supply throughput across the Eastern Front. Even a \"working\" supply setup can collapse for a few weeks during mud season.\n\n8. **Fuel shortage compounding the problem.** This isn't the same system as supply, but it hits at the same time: German armor stalling from lack of fuel looks and feels like a supply problem. Low oil stockpiles plus long distances from synthetic refineries make this worse the deeper you push.\n\n## How to fix it\n\n**Before you invade:**\n- Stockpile fuel (build synthetic refineries, secure oil from Romania/Ploesti, and bank a fuel reserve) so your panzer divisions don't stall a few weeks in.\n- Make sure your jump-off infrastructure (Poland, the border states) is upgraded \u2014 infrastructure investment here pays off immediately once you cross into the USSR.\n- Give your spearhead divisions a **Logistics Company** support company. It directly reduces supply consumption per division, which is the single best \"set and forget\" fix for armor/motorized formations.\n- Pick a general with the **Logistics Wizard** trait for your main invasion army if you can get one; it further cuts supply strain for that army.\n- If you're using Mobile Warfare doctrine, make sure you've taken the logistics-related bonuses in that tree.\n\n**During the invasion:**\n- **Build railways continuously as you advance.** Use engineers/construction to extend rail from your existing network into newly captured states. Don't wait until supply is already critical \u2014 start extending infra as soon as a state is secured.\n- **Build (or repair) supply hubs near the front**, not just far in the rear. A hub close to the line drastically shortens the \"last mile\" that has to travel over poor local infrastructure.\n- **Widen your logistics corridor.** Instead of funneling your whole army through one rail line/road, spread the offensive across multiple axes so you're not saturating a single throughput-limited path.\n- **Don't overextend the spearhead.** Periodically pause fast units to let rail/hub construction catch up, rather than continuously sprinting toward Moscow. A controlled \"leapfrog\" advance (push, consolidate/build, push again) keeps supply positive instead of deeply negative.\n- **Garrison captured territory** and manage compliance/resistance so partisans aren't cutting your rail lines and hub throughput behind the front.\n- **Trim division supply need where you can** \u2014 don't make every division heavy armor/motorized; a core of infantry (which needs much less supply) holding ground while a smaller mechanized/armor fist does the breakthroughs eases total consumption.\n- **Time major pushes around mud season** if possible \u2014 expect a supply (and speed) penalty during rasputitsa and don't panic-diagnose it as a permanent problem; it's largely weather-driven and will ease up.\n\n## Quick checklist\n- [ ] Fuel stockpile built up before Barbarossa starts\n- [ ] Logistics Company support company on spearhead divisions\n- [ ] Railway construction actively extending behind the advance\n- [ ] New/repaired supply hubs near the current front line\n- [ ] Advance split across multiple corridors, not one funnel\n- [ ] Rear areas garrisoned to control resistance\n- [ ] Not pure motorized/armor \u2014 mixed with lower-supply infantry for holding\n\nIf you do most of these, supply in Russia stays manageable even on a fast timeline; skipping the railway/hub construction step is the single most common reason players \"run out\" mid-offensive.\n"}], "grading": {"expectations": [{"text": "Mentions supply hubs and/or railway levels matching the mechanics file", "passed": true, "evidence": "Mentions building railways and forward supply hubs \u2014 directionally correct even without the file."}, {"text": "Gives at least one concrete, mechanically-specific fix", "passed": true, "evidence": "Logistics Company support company, Logistics Wizard general, multi-corridor advance \u2014 reasonably concrete, though no exact numbers/thresholds."}, {"text": "Does not contradict the corpus's supply model", "passed": true, "evidence": "No explicit contradiction found, though doesn't reflect the exact three-tier state/hub/aerial supply stacking model or the Deutsches Heer spirit Germany-specific detail."}], "summary": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3}}}], "previous_feedback": {}, "previous_outputs": {}, "benchmark": {"metadata": {"skill_name": "hoi4-companion", "skill_path": "<path/to/skill>", "executor_model": "<model-name>", "analyzer_model": "<model-name>", "timestamp": "2026-08-23T05:49:58Z", "evals_run": [0, 1, 2, 3], "runs_per_configuration": 3}, "runs": [{"eval_id": 0, "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 92.6, "tokens": 69334, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names", "passed": true, "evidence": "Cites Preserve Greater Romania, Balkans Dominance, Institute Royal Dictatorship, Civil Works, National Defense Industry, Expand Ploiesti Oil Production, Army Maneuvers, Army War College, Expand the Air Force, Expand the Galati Shipyards \u2014 with correct prerequisites and mutual-exclusion relationships."}, {"text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md", "passed": true, "evidence": "12 states, 18.07M population, 20 factories (11 civ/7 mil/2 naval), 44 oil, 3 research slots \u2014 all specific numbers."}, {"text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice", "passed": true, "evidence": "Discusses Neutral Foreign Policy spirit's specific tension-limit penalties, Ploiesti oil as strategic asset, Hungary/USSR border threats, Little Entente guarantees by name."}], "notes": []}, {"eval_id": 1, "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 4, "failed": 0, "total": 4, "time_seconds": 43.3, "tokens": 40143, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "States the over-width penalty formula matching the file", "passed": true, "evidence": "Quotes 'combat width penalty = -100% x (total_width - battle_width) / battle_width' verbatim plus the -33% join cap."}, {"text": "States Forest terrain's base combat width as 60", "passed": true, "evidence": "States Forest 60 base explicitly."}, {"text": "States Forest's +30 per extra attack direction", "passed": true, "evidence": "States +30 per direction explicitly."}, {"text": "Does not hedge with approximate language", "passed": true, "evidence": "Presents all figures as exact, includes the two worked examples from the source file (80-width Urban, 70-width Plains) verbatim."}], "notes": []}, {"eval_id": 2, "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 49.2, "tokens": 41775, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Every achievement name listed actually appears in the source file", "passed": true, "evidence": "Team America, History Repeated Itself, Georgia On My Mind, Arsenal of Democracy, Last for a Thousand Years, Britzkrieg, etc. \u2014 all real named achievements with state IDs and PP costs cited, consistent with the corpus's sourcing."}, {"text": "No achievement from a different DLC group is misattributed", "passed": true, "evidence": "All 21 listed are grouped correctly by nation as they appear in the man-the-guns.md file; no cross-DLC contamination noted."}, {"text": "Conditions given match the file, not invented/approximated", "passed": true, "evidence": "Specific mechanical conditions given (state numbers 365/231/720, PP amounts 300-700, division counts 72-96) \u2014 precise, not vague."}], "notes": []}, {"eval_id": 3, "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 83.0, "tokens": 53416, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Mentions supply hubs and/or railway levels matching the mechanics file", "passed": true, "evidence": "Discusses hub range/throughput falloff, railway upgrade levels, captured-rail conversion delay."}, {"text": "Gives at least one concrete, mechanically-specific fix", "passed": true, "evidence": "Forward hub cadence, rail upgrade costs, motorize-in-plains-only, Logistics Company support company, 70-80% capacity margin guidance."}, {"text": "Does not contradict the corpus's supply model", "passed": true, "evidence": "Consistent with supply-and-logistics.md's support-capacity (not stockpile) framing; additionally found Germany's Deutsches Heer spirit (+15% supply consumption) by cross-referencing the country file \u2014 a detail beyond the minimum bar."}], "notes": []}, {"eval_id": 0, "configuration": "without_skill", "run_number": 1, "result": {"pass_rate": 0.3333, "passed": 1, "failed": 2, "total": 3, "time_seconds": 61.4, "tokens": 35318, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Cites specific Romanian focus names that actually appear in references/06-focus-trees/romania.md, not generic/invented focus names", "passed": false, "evidence": "Explicitly says 'Regardless of exact focus names (these can shift slightly between patches/DLC)' and gives only generic categories ('political stabilization focuses', 'economic/industry focuses') \u2014 zero actual focus names cited."}, {"text": "Mentions at least one concrete 1936 starting stat for Romania matching references/05-countries/romania.md", "passed": false, "evidence": "No factory counts, population, research slots, or oil numbers given anywhere."}, {"text": "Advice is specific to Romania's actual situation rather than generic HOI4 advice", "passed": true, "evidence": "Correctly identifies Ploiesti oil, Hungary/Transylvania and USSR/Bessarabia claims, Little Entente \u2014 broad strokes right, but no specifics."}], "notes": []}, {"eval_id": 1, "configuration": "without_skill", "run_number": 1, "result": {"pass_rate": 0.0, "passed": 0, "failed": 4, "total": 4, "time_seconds": 52.3, "tokens": 34957, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "States the over-width penalty formula matching the file", "passed": false, "evidence": "Describes the mechanism qualitatively (excess divisions become reserves) but does not give the exact -100% x (total-battle)/battle formula."}, {"text": "States Forest terrain's base combat width as 60", "passed": false, "evidence": "Gives 'roughly 15-20% less than plains' as a rough estimate, not the exact value 60."}, {"text": "States Forest's +30 per extra attack direction", "passed": false, "evidence": "Not mentioned at all."}, {"text": "Does not hedge with approximate language", "passed": false, "evidence": "Explicitly self-flags: 'exact numeric constants...are approximate recollection...should be checked against a current wiki'."}], "notes": []}, {"eval_id": 2, "configuration": "without_skill", "run_number": 1, "result": {"pass_rate": 0.0, "passed": 0, "failed": 3, "total": 3, "time_seconds": 84.1, "tokens": 37451, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Every achievement name listed actually appears in the source file", "passed": false, "evidence": "None of the baseline's achievement names ('Restore the Monarchy path', 'Splendid Isolation', 'Imperial Federation', 'Naval supremacy as the UK', etc.) match any real achievement name from the with-skill answer \u2014 these appear to be invented/paraphrased descriptions, not real achievement titles."}, {"text": "No achievement from a different DLC group is misattributed", "passed": false, "evidence": "Includes France focus-tree achievements under Man the Guns; the actual MTG achievements list (per the corpus) is US/UK/Netherlands/Mexico/minor-powers, no France-specific ones in this DLC group."}, {"text": "Conditions given match the file, not invented/approximated", "passed": false, "evidence": "Self-flagged throughout as approximate/unverified ('treat exact wording/numbers as approximate')."}], "notes": []}, {"eval_id": 3, "configuration": "without_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 3, "failed": 0, "total": 3, "time_seconds": 61.9, "tokens": 35265, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "Mentions supply hubs and/or railway levels matching the mechanics file", "passed": true, "evidence": "Mentions building railways and forward supply hubs \u2014 directionally correct even without the file."}, {"text": "Gives at least one concrete, mechanically-specific fix", "passed": true, "evidence": "Logistics Company support company, Logistics Wizard general, multi-corridor advance \u2014 reasonably concrete, though no exact numbers/thresholds."}, {"text": "Does not contradict the corpus's supply model", "passed": true, "evidence": "No explicit contradiction found, though doesn't reflect the exact three-tier state/hub/aerial supply stacking model or the Deutsches Heer spirit Germany-specific detail."}], "notes": []}], "run_summary": {"with_skill": {"pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0}, "time_seconds": {"mean": 67.025, "stddev": 24.426, "min": 43.3, "max": 92.6}, "tokens": {"mean": 51167.0, "stddev": 13476.3513, "min": 40143, "max": 69334}}, "without_skill": {"pass_rate": {"mean": 0.3333, "stddev": 0.4714, "min": 0.0, "max": 1.0}, "time_seconds": {"mean": 64.925, "stddev": 13.5234, "min": 52.3, "max": 84.1}, "tokens": {"mean": 35747.75, "stddev": 1146.6006, "min": 34957, "max": 37451}}, "delta": {"pass_rate": "+0.67", "time_seconds": "+2.1", "tokens": "+15419"}}, "notes": []}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + (summary.passed || 0) + ' passed, ' + (summary.failed || 0) + ' failed of ' + (summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += metadata.timestamp + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + metadata.evals_run.join(", ") + " &mdash; ";
+      html += (metadata.runs_per_configuration || "?") + " runs per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + deltaClass(delta.pass_rate) + '">' + (delta.pass_rate || "—") + "</td></tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td></tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + deltaClass(delta.tokens) + '">' + (delta.tokens || "—") + "</td></tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) => a - b);
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[project]
+name = "hoi-wiki-crawler"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "bjafl", email = "bjarte@dev.flode.net" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "playwright>=1.62.0",
+]
+
+[project.scripts]
+hoi-wiki-crawler = "hoi_wiki_crawler:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"

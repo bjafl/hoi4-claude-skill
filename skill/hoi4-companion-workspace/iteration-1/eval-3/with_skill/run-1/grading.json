@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Mentions supply hubs and/or railway levels matching the mechanics file",
+      "passed": true,
+      "evidence": "Discusses hub range/throughput falloff, railway upgrade levels, captured-rail conversion delay."
+    },
+    {
+      "text": "Gives at least one concrete, mechanically-specific fix",
+      "passed": true,
+      "evidence": "Forward hub cadence, rail upgrade costs, motorize-in-plains-only, Logistics Company support company, 70-80% capacity margin guidance."
+    },
+    {
+      "text": "Does not contradict the corpus's supply model",
+      "passed": true,
+      "evidence": "Consistent with supply-and-logistics.md's support-capacity (not stockpile) framing; additionally found Germany's Deutsches Heer spirit (+15% supply consumption) by cross-referencing the country file \u2014 a detail beyond the minimum bar."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 3,
+    "failed": 0,
+    "total": 3
+  }
+}

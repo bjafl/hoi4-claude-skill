@@ -1,0 +1,30 @@
+{
+  "expectations": [
+    {
+      "text": "States the over-width penalty formula matching the file",
+      "passed": true,
+      "evidence": "Quotes 'combat width penalty = -100% x (total_width - battle_width) / battle_width' verbatim plus the -33% join cap."
+    },
+    {
+      "text": "States Forest terrain's base combat width as 60",
+      "passed": true,
+      "evidence": "States Forest 60 base explicitly."
+    },
+    {
+      "text": "States Forest's +30 per extra attack direction",
+      "passed": true,
+      "evidence": "States +30 per direction explicitly."
+    },
+    {
+      "text": "Does not hedge with approximate language",
+      "passed": true,
+      "evidence": "Presents all figures as exact, includes the two worked examples from the source file (80-width Urban, 70-width Plains) verbatim."
+    }
+  ],
+  "summary": {
+    "pass_rate": 1.0,
+    "passed": 4,
+    "failed": 0,
+    "total": 4
+  }
+}
