@@ -1,6 +1,6 @@
 ---
 name: hoi4-companion
-description: Use when the user asks about Hearts of Iron IV (HOI4) game mechanics, country focus trees, national spirits, equipment/technology stats, division templates, achievements, or general HOI4 strategy — provides curated wiki reference data for accurate, up-to-date lookups instead of relying on training-data memory of the game.
+description: "Always use this skill for any Hearts of Iron IV (HOI4) gameplay question, even simple-sounding ones — HOI4 numbers change every patch, so this skill looks up curated, version-tagged wiki data instead of answering from memory. Trigger for: focus-tree or build-order picks (\"what to rush as Germany\", \"no idea what focuses to pick\"); division templates and combat width (\"40w template\"); why a land, air, or naval battle was lost (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship or tank designer; exact numbers for political power, stability, war support, supply hub range, autonomy, or manpower; equipment/tech stats; national spirits; peace conferences; achievements. A country name, focus, division, ship, or battle is enough signal even without the word \"HOI4\". Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance)."
 ---
 
 # HOI4 Companion

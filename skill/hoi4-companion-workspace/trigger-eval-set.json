@@ -1,0 +1,22 @@
+[
+  {"query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?", "should_trigger": true},
+  {"query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?", "should_trigger": true},
+  {"query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?", "should_trigger": true},
+  {"query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch", "should_trigger": true},
+  {"query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?", "should_trigger": true},
+  {"query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios", "should_trigger": true},
+  {"query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?", "should_trigger": true},
+  {"query": "explain how the paranoia mechanic works if i'm playing tankie soviets", "should_trigger": true},
+  {"query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?", "should_trigger": true},
+  {"query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?", "should_trigger": true},
+  {"query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?", "should_trigger": false},
+  {"query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?", "should_trigger": false},
+  {"query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?", "should_trigger": false},
+  {"query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?", "should_trigger": false},
+  {"query": "Can you recommend some good tank documentaries about WWII armored warfare?", "should_trigger": false},
+  {"query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?", "should_trigger": false},
+  {"query": "how much does hearts of iron 4 cost on steam right now and is it on sale", "should_trigger": false},
+  {"query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war", "should_trigger": false},
+  {"query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?", "should_trigger": false},
+  {"query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong", "should_trigger": false}
+]

@@ -1,0 +1,1545 @@
+Split: 12 train, 8 test (holdout=0.4)
+
+============================================================
+Iteration 1/5
+Description: Use when the user asks about Hearts of Iron IV (HOI4) game mechanics, country focus trees, national spirits, equipment/technology stats, division templates, achievements, or general HOI4 strategy — provides curated wiki reference data for accurate, up-to-date lookups instead of relying on training-data memory of the game.
+============================================================
+Train: 20/36 correct, precision=100% recall=11% accuracy=56% (91.3s)
+  [FAIL] rate=1/3 expected=True: i keep losing naval battles as the uk even though i have mor
+  [FAIL] rate=0/3 expected=True: What DLC do I need for the ship designer feature in Hearts o
+  [FAIL] rate=0/3 expected=True: How much political power does declaring war cost, and does t
+  [FAIL] rate=0/3 expected=True: Can you help me figure out a good 40w armor division templat
+  [FAIL] rate=1/3 expected=True: yo i just started a campaign as germany in hoi4 and i have n
+  [FAIL] rate=0/3 expected=True: What's the exact formula for how supply hubs calculate their
+  [PASS] rate=0/3 expected=False: What's a good strategy board game similar to Axis & Allies I
+  [PASS] rate=0/3 expected=False: What other grand strategy games has Paradox made besides Hea
+  [PASS] rate=0/3 expected=False: how much does hearts of iron 4 cost on steam right now and i
+  [PASS] rate=0/3 expected=False: I want to write a fan-fiction story set in an alternate WWII
+  [PASS] rate=0/3 expected=False: I'm writing a history essay about the actual WWII Battle of 
+  [PASS] rate=0/3 expected=False: my hoi4 keeps crashing on startup after the last windows upd
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: explain how the paranoia mechanic works if i'm playing tanki
+  [FAIL] rate=0/3 expected=True: quick q - in hoi4 does the land doctrine system still work a
+  [FAIL] rate=1/3 expected=True: I'm trying to get the achievement where you sink the HMS Hoo
+  [FAIL] rate=0/3 expected=True: My friend says I should build 7/2 infantry templates but som
+  [PASS] rate=0/3 expected=False: I'm modding Hearts of Iron 4 and need help writing a new foc
+  [PASS] rate=0/3 expected=False: I'm building a spreadsheet to track my Steam game library in
+  [PASS] rate=0/3 expected=False: Can you recommend some good tank documentaries about WWII ar
+  [PASS] rate=0/3 expected=False: How do I set up a dedicated game server for Hearts of Iron 4
+
+Improving description...
+Proposed (16.3s): Use for any question about actually playing Hearts of Iron IV (HOI4) — the game's mechanics, numbers, and strategy. Covers focus trees, national spirits, division templates and combat width, land/air/naval combat mechanics (e.g. screening ratios, why battles are being lost), equipment/technology stats, supply range, political power costs, autonomy, peace conferences, DLC feature/content questions, achievements, and general playthrough strategy or build advice ("what should I do as X", "help me pick focuses/build a template"). Trigger even if the message doesn't literally say "HOI4" but is clearly about play in this specific game. Provides curated, versioned wiki reference data instead of relying on possibly-stale training memory for a game that changes with every patch/DLC. Do NOT use for: other Paradox or strategy games, board games, buying/pricing/Steam questions, real-world WWII history, fan fiction, or technical issues unrelated to gameplay (crashes, installation, performance).
+
+============================================================
+Iteration 2/5
+Description: Use for any question about actually playing Hearts of Iron IV (HOI4) — the game's mechanics, numbers, and strategy. Covers focus trees, national spirits, division templates and combat width, land/air/naval combat mechanics (e.g. screening ratios, why battles are being lost), equipment/technology stats, supply range, political power costs, autonomy, peace conferences, DLC feature/content questions, achievements, and general playthrough strategy or build advice ("what should I do as X", "help me pick focuses/build a template"). Trigger even if the message doesn't literally say "HOI4" but is clearly about play in this specific game. Provides curated, versioned wiki reference data instead of relying on possibly-stale training memory for a game that changes with every patch/DLC. Do NOT use for: other Paradox or strategy games, board games, buying/pricing/Steam questions, real-world WWII history, fan fiction, or technical issues unrelated to gameplay (crashes, installation, performance).
+============================================================
+Train: 21/36 correct, precision=100% recall=17% accuracy=58% (97.9s)
+  [FAIL] rate=1/3 expected=True: i keep losing naval battles as the uk even though i have mor
+  [FAIL] rate=0/3 expected=True: What DLC do I need for the ship designer feature in Hearts o
+  [FAIL] rate=0/3 expected=True: How much political power does declaring war cost, and does t
+  [FAIL] rate=1/3 expected=True: Can you help me figure out a good 40w armor division templat
+  [FAIL] rate=0/3 expected=True: yo i just started a campaign as germany in hoi4 and i have n
+  [FAIL] rate=1/3 expected=True: What's the exact formula for how supply hubs calculate their
+  [PASS] rate=0/3 expected=False: What's a good strategy board game similar to Axis & Allies I
+  [PASS] rate=0/3 expected=False: What other grand strategy games has Paradox made besides Hea
+  [PASS] rate=0/3 expected=False: how much does hearts of iron 4 cost on steam right now and i
+  [PASS] rate=0/3 expected=False: I want to write a fan-fiction story set in an alternate WWII
+  [PASS] rate=0/3 expected=False: I'm writing a history essay about the actual WWII Battle of 
+  [PASS] rate=0/3 expected=False: my hoi4 keeps crashing on startup after the last windows upd
+Test : 13/24 correct, precision=100% recall=8% accuracy=54% (0.0s)
+  [FAIL] rate=0/3 expected=True: explain how the paranoia mechanic works if i'm playing tanki
+  [FAIL] rate=0/3 expected=True: quick q - in hoi4 does the land doctrine system still work a
+  [FAIL] rate=1/3 expected=True: I'm trying to get the achievement where you sink the HMS Hoo
+  [FAIL] rate=0/3 expected=True: My friend says I should build 7/2 infantry templates but som
+  [PASS] rate=0/3 expected=False: I'm modding Hearts of Iron 4 and need help writing a new foc
+  [PASS] rate=0/3 expected=False: I'm building a spreadsheet to track my Steam game library in
+  [PASS] rate=0/3 expected=False: Can you recommend some good tank documentaries about WWII ar
+  [PASS] rate=0/3 expected=False: How do I set up a dedicated game server for Hearts of Iron 4
+
+Improving description...
+Proposed (49.3s): Trigger for questions about actually playing Hearts of Iron IV (HOI4), Paradox's WWII grand strategy game. This includes: which DLC unlocks a given in-game feature/mechanic (e.g. ship designer, tank designer) — NOT pricing/sale questions; focus tree order and country build advice ("what should I rush as Germany", "no idea what focuses to pick"); division templates and combat width ("40w template"); diagnosing why land/air/naval battles are being lost (screening ratios, org, breakthrough vs defense); equipment/tech stats; national spirits; supply range/hub mechanics; in-game costs like political power, stability, war support; autonomy levels; peace conferences; achievements. Trigger even without the literal word "HOI4" if context (a country name, focuses, divisions, battles, ships) makes the game obvious. Supplies curated, version-tagged wiki data instead of possibly-stale memory. Do NOT trigger for: Steam price/purchase questions, other Paradox or strategy/board games, real-world WWII history, fan fiction, or non-gameplay technical issues (crashes, installation, mods, performance).
+
+============================================================
+Iteration 3/5
+Description: Trigger for questions about actually playing Hearts of Iron IV (HOI4), Paradox's WWII grand strategy game. This includes: which DLC unlocks a given in-game feature/mechanic (e.g. ship designer, tank designer) — NOT pricing/sale questions; focus tree order and country build advice ("what should I rush as Germany", "no idea what focuses to pick"); division templates and combat width ("40w template"); diagnosing why land/air/naval battles are being lost (screening ratios, org, breakthrough vs defense); equipment/tech stats; national spirits; supply range/hub mechanics; in-game costs like political power, stability, war support; autonomy levels; peace conferences; achievements. Trigger even without the literal word "HOI4" if context (a country name, focuses, divisions, battles, ships) makes the game obvious. Supplies curated, version-tagged wiki data instead of possibly-stale memory. Do NOT trigger for: Steam price/purchase questions, other Paradox or strategy/board games, real-world WWII history, fan fiction, or non-gameplay technical issues (crashes, installation, mods, performance).
+============================================================
+Train: 20/36 correct, precision=100% recall=11% accuracy=56% (99.9s)
+  [FAIL] rate=0/3 expected=True: What DLC do I need for the ship designer feature in Hearts o
+  [FAIL] rate=1/3 expected=True: How much political power does declaring war cost, and does t
+  [FAIL] rate=0/3 expected=True: i keep losing naval battles as the uk even though i have mor
+  [FAIL] rate=0/3 expected=True: Can you help me figure out a good 40w armor division templat
+  [FAIL] rate=0/3 expected=True: yo i just started a campaign as germany in hoi4 and i have n
+  [FAIL] rate=1/3 expected=True: What's the exact formula for how supply hubs calculate their
+  [PASS] rate=0/3 expected=False: What other grand strategy games has Paradox made besides Hea
+  [PASS] rate=0/3 expected=False: What's a good strategy board game similar to Axis & Allies I
+  [PASS] rate=0/3 expected=False: how much does hearts of iron 4 cost on steam right now and i
+  [PASS] rate=0/3 expected=False: I want to write a fan-fiction story set in an alternate WWII
+  [PASS] rate=0/3 expected=False: I'm writing a history essay about the actual WWII Battle of 
+  [PASS] rate=0/3 expected=False: my hoi4 keeps crashing on startup after the last windows upd
+Test : 14/24 correct, precision=100% recall=17% accuracy=58% (0.0s)
+  [FAIL] rate=0/3 expected=True: explain how the paranoia mechanic works if i'm playing tanki
+  [FAIL] rate=1/3 expected=True: quick q - in hoi4 does the land doctrine system still work a
+  [FAIL] rate=0/3 expected=True: I'm trying to get the achievement where you sink the HMS Hoo
+  [FAIL] rate=1/3 expected=True: My friend says I should build 7/2 infantry templates but som
+  [PASS] rate=0/3 expected=False: I'm building a spreadsheet to track my Steam game library in
+  [PASS] rate=0/3 expected=False: How do I set up a dedicated game server for Hearts of Iron 4
+  [PASS] rate=0/3 expected=False: Can you recommend some good tank documentaries about WWII ar
+  [PASS] rate=0/3 expected=False: I'm modding Hearts of Iron 4 and need help writing a new foc
+
+Improving description...
+Proposed (83.3s): Use when the user needs hands-on help playing Hearts of Iron IV (HOI4) — not just chatting about the game. Covers: picking focuses or a build order for a country ("what to rush as Germany", "no idea what focuses to pick"); designing division templates and combat width ("40w template"); diagnosing lost land, air, or naval battles (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship/tank designer (not price questions); exact numbers for political power, stability, war support, supply hub range, and autonomy; equipment/tech stats; national spirits; peace conferences; achievements. Applies even without the word "HOI4" if a country name, focus, division, or battle makes the game clear. HOI4 numbers shift every patch/DLC, so this skill checks curated, version-tagged wiki data instead of answering from memory. Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).
+
+============================================================
+Iteration 4/5
+Description: Use when the user needs hands-on help playing Hearts of Iron IV (HOI4) — not just chatting about the game. Covers: picking focuses or a build order for a country ("what to rush as Germany", "no idea what focuses to pick"); designing division templates and combat width ("40w template"); diagnosing lost land, air, or naval battles (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship/tank designer (not price questions); exact numbers for political power, stability, war support, supply hub range, and autonomy; equipment/tech stats; national spirits; peace conferences; achievements. Applies even without the word "HOI4" if a country name, focus, division, or battle makes the game clear. HOI4 numbers shift every patch/DLC, so this skill checks curated, version-tagged wiki data instead of answering from memory. Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).
+============================================================
+Train: 19/36 correct, precision=100% recall=6% accuracy=53% (103.3s)
+  [FAIL] rate=1/3 expected=True: How much political power does declaring war cost, and does t
+  [FAIL] rate=0/3 expected=True: Can you help me figure out a good 40w armor division templat
+  [FAIL] rate=0/3 expected=True: i keep losing naval battles as the uk even though i have mor
+  [FAIL] rate=0/3 expected=True: What DLC do I need for the ship designer feature in Hearts o
+  [FAIL] rate=0/3 expected=True: yo i just started a campaign as germany in hoi4 and i have n
+  [FAIL] rate=0/3 expected=True: What's the exact formula for how supply hubs calculate their
+  [PASS] rate=0/3 expected=False: What's a good strategy board game similar to Axis & Allies I
+  [PASS] rate=0/3 expected=False: What other grand strategy games has Paradox made besides Hea
+  [PASS] rate=0/3 expected=False: I want to write a fan-fiction story set in an alternate WWII
+  [PASS] rate=0/3 expected=False: how much does hearts of iron 4 cost on steam right now and i
+  [PASS] rate=0/3 expected=False: I'm writing a history essay about the actual WWII Battle of 
+  [PASS] rate=0/3 expected=False: my hoi4 keeps crashing on startup after the last windows upd
+Test : 14/24 correct, precision=100% recall=17% accuracy=58% (0.0s)
+  [FAIL] rate=0/3 expected=True: quick q - in hoi4 does the land doctrine system still work a
+  [FAIL] rate=1/3 expected=True: explain how the paranoia mechanic works if i'm playing tanki
+  [FAIL] rate=0/3 expected=True: I'm trying to get the achievement where you sink the HMS Hoo
+  [FAIL] rate=1/3 expected=True: My friend says I should build 7/2 infantry templates but som
+  [PASS] rate=0/3 expected=False: I'm building a spreadsheet to track my Steam game library in
+  [PASS] rate=0/3 expected=False: I'm modding Hearts of Iron 4 and need help writing a new foc
+  [PASS] rate=0/3 expected=False: Can you recommend some good tank documentaries about WWII ar
+  [PASS] rate=0/3 expected=False: How do I set up a dedicated game server for Hearts of Iron 4
+
+Improving description...
+Proposed (64.2s): Always use this skill for any Hearts of Iron IV (HOI4) gameplay question, even simple-sounding ones — HOI4 numbers change every patch, so this skill looks up curated, version-tagged wiki data instead of answering from memory. Trigger for: focus-tree or build-order picks ("what to rush as Germany", "no idea what focuses to pick"); division templates and combat width ("40w template"); why a land, air, or naval battle was lost (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship or tank designer; exact numbers for political power, stability, war support, supply hub range, autonomy, or manpower; equipment/tech stats; national spirits; peace conferences; achievements. A country name, focus, division, ship, or battle is enough signal even without the word "HOI4". Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).
+
+============================================================
+Iteration 5/5
+Description: Always use this skill for any Hearts of Iron IV (HOI4) gameplay question, even simple-sounding ones — HOI4 numbers change every patch, so this skill looks up curated, version-tagged wiki data instead of answering from memory. Trigger for: focus-tree or build-order picks ("what to rush as Germany", "no idea what focuses to pick"); division templates and combat width ("40w template"); why a land, air, or naval battle was lost (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship or tank designer; exact numbers for political power, stability, war support, supply hub range, autonomy, or manpower; equipment/tech stats; national spirits; peace conferences; achievements. A country name, focus, division, ship, or battle is enough signal even without the word "HOI4". Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).
+============================================================
+Train: 21/36 correct, precision=100% recall=17% accuracy=58% (96.3s)
+  [FAIL] rate=1/3 expected=True: What DLC do I need for the ship designer feature in Hearts o
+  [FAIL] rate=0/3 expected=True: i keep losing naval battles as the uk even though i have mor
+  [FAIL] rate=0/3 expected=True: How much political power does declaring war cost, and does t
+  [PASS] rate=2/3 expected=True: Can you help me figure out a good 40w armor division templat
+  [FAIL] rate=0/3 expected=True: yo i just started a campaign as germany in hoi4 and i have n
+  [FAIL] rate=0/3 expected=True: What's the exact formula for how supply hubs calculate their
+  [PASS] rate=0/3 expected=False: What's a good strategy board game similar to Axis & Allies I
+  [PASS] rate=0/3 expected=False: What other grand strategy games has Paradox made besides Hea
+  [PASS] rate=0/3 expected=False: I want to write a fan-fiction story set in an alternate WWII
+  [PASS] rate=0/3 expected=False: how much does hearts of iron 4 cost on steam right now and i
+  [PASS] rate=0/3 expected=False: I'm writing a history essay about the actual WWII Battle of 
+  [PASS] rate=0/3 expected=False: my hoi4 keeps crashing on startup after the last windows upd
+Test : 15/24 correct, precision=100% recall=25% accuracy=62% (0.0s)
+  [FAIL] rate=1/3 expected=True: explain how the paranoia mechanic works if i'm playing tanki
+  [FAIL] rate=1/3 expected=True: quick q - in hoi4 does the land doctrine system still work a
+  [FAIL] rate=1/3 expected=True: I'm trying to get the achievement where you sink the HMS Hoo
+  [FAIL] rate=0/3 expected=True: My friend says I should build 7/2 infantry templates but som
+  [PASS] rate=0/3 expected=False: I'm building a spreadsheet to track my Steam game library in
+  [PASS] rate=0/3 expected=False: Can you recommend some good tank documentaries about WWII ar
+  [PASS] rate=0/3 expected=False: I'm modding Hearts of Iron 4 and need help writing a new foc
+  [PASS] rate=0/3 expected=False: How do I set up a dedicated game server for Hearts of Iron 4
+
+Max iterations reached (5).
+
+Exit reason: max_iterations (5)
+Best score: 4/8 (iteration 1)
+
+Report: /tmp/skill_description_report_hoi4-companion_20260823_070340.html
+{
+  "exit_reason": "max_iterations (5)",
+  "original_description": "Use when the user asks about Hearts of Iron IV (HOI4) game mechanics, country focus trees, national spirits, equipment/technology stats, division templates, achievements, or general HOI4 strategy \u2014 provides curated wiki reference data for accurate, up-to-date lookups instead of relying on training-data memory of the game.",
+  "best_description": "Use when the user asks about Hearts of Iron IV (HOI4) game mechanics, country focus trees, national spirits, equipment/technology stats, division templates, achievements, or general HOI4 strategy \u2014 provides curated wiki reference data for accurate, up-to-date lookups instead of relying on training-data memory of the game.",
+  "best_score": "4/8",
+  "best_train_score": "6/12",
+  "best_test_score": "4/8",
+  "final_description": "Always use this skill for any Hearts of Iron IV (HOI4) gameplay question, even simple-sounding ones \u2014 HOI4 numbers change every patch, so this skill looks up curated, version-tagged wiki data instead of answering from memory. Trigger for: focus-tree or build-order picks (\"what to rush as Germany\", \"no idea what focuses to pick\"); division templates and combat width (\"40w template\"); why a land, air, or naval battle was lost (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship or tank designer; exact numbers for political power, stability, war support, supply hub range, autonomy, or manpower; equipment/tech stats; national spirits; peace conferences; achievements. A country name, focus, division, ship, or battle is enough signal even without the word \"HOI4\". Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).",
+  "iterations_run": 5,
+  "holdout": 0.4,
+  "train_size": 12,
+  "test_size": 8,
+  "history": [
+    {
+      "iteration": 1,
+      "description": "Use when the user asks about Hearts of Iron IV (HOI4) game mechanics, country focus trees, national spirits, equipment/technology stats, division templates, achievements, or general HOI4 strategy \u2014 provides curated wiki reference data for accurate, up-to-date lookups instead of relying on training-data memory of the game.",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "explain how the paranoia mechanic works if i'm playing tankie soviets",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Can you recommend some good tank documentaries about WWII armored warfare?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "description": "Use for any question about actually playing Hearts of Iron IV (HOI4) \u2014 the game's mechanics, numbers, and strategy. Covers focus trees, national spirits, division templates and combat width, land/air/naval combat mechanics (e.g. screening ratios, why battles are being lost), equipment/technology stats, supply range, political power costs, autonomy, peace conferences, DLC feature/content questions, achievements, and general playthrough strategy or build advice (\"what should I do as X\", \"help me pick focuses/build a template\"). Trigger even if the message doesn't literally say \"HOI4\" but is clearly about play in this specific game. Provides curated, versioned wiki reference data instead of relying on possibly-stale training memory for a game that changes with every patch/DLC. Do NOT use for: other Paradox or strategy games, board games, buying/pricing/Steam questions, real-world WWII history, fan fiction, or technical issues unrelated to gameplay (crashes, installation, performance).",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "explain how the paranoia mechanic works if i'm playing tankie soviets",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Can you recommend some good tank documentaries about WWII armored warfare?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "description": "Trigger for questions about actually playing Hearts of Iron IV (HOI4), Paradox's WWII grand strategy game. This includes: which DLC unlocks a given in-game feature/mechanic (e.g. ship designer, tank designer) \u2014 NOT pricing/sale questions; focus tree order and country build advice (\"what should I rush as Germany\", \"no idea what focuses to pick\"); division templates and combat width (\"40w template\"); diagnosing why land/air/naval battles are being lost (screening ratios, org, breakthrough vs defense); equipment/tech stats; national spirits; supply range/hub mechanics; in-game costs like political power, stability, war support; autonomy levels; peace conferences; achievements. Trigger even without the literal word \"HOI4\" if context (a country name, focuses, divisions, battles, ships) makes the game obvious. Supplies curated, version-tagged wiki data instead of possibly-stale memory. Do NOT trigger for: Steam price/purchase questions, other Paradox or strategy/board games, real-world WWII history, fan fiction, or non-gameplay technical issues (crashes, installation, mods, performance).",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "explain how the paranoia mechanic works if i'm playing tankie soviets",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Can you recommend some good tank documentaries about WWII armored warfare?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "description": "Use when the user needs hands-on help playing Hearts of Iron IV (HOI4) \u2014 not just chatting about the game. Covers: picking focuses or a build order for a country (\"what to rush as Germany\", \"no idea what focuses to pick\"); designing division templates and combat width (\"40w template\"); diagnosing lost land, air, or naval battles (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship/tank designer (not price questions); exact numbers for political power, stability, war support, supply hub range, and autonomy; equipment/tech stats; national spirits; peace conferences; achievements. Applies even without the word \"HOI4\" if a country name, focus, division, or battle makes the game clear. HOI4 numbers shift every patch/DLC, so this skill checks curated, version-tagged wiki data instead of answering from memory. Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).",
+      "train_passed": 6,
+      "train_failed": 6,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "explain how the paranoia mechanic works if i'm playing tankie soviets",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Can you recommend some good tank documentaries about WWII armored warfare?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 6,
+      "failed": 6,
+      "total": 12,
+      "results": [
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "description": "Always use this skill for any Hearts of Iron IV (HOI4) gameplay question, even simple-sounding ones \u2014 HOI4 numbers change every patch, so this skill looks up curated, version-tagged wiki data instead of answering from memory. Trigger for: focus-tree or build-order picks (\"what to rush as Germany\", \"no idea what focuses to pick\"); division templates and combat width (\"40w template\"); why a land, air, or naval battle was lost (screening ratios, org, breakthrough vs defense); which DLC unlocks a feature like the ship or tank designer; exact numbers for political power, stability, war support, supply hub range, autonomy, or manpower; equipment/tech stats; national spirits; peace conferences; achievements. A country name, focus, division, ship, or battle is enough signal even without the word \"HOI4\". Skip for Steam pricing, other Paradox/strategy games, real WWII history, fan fiction, or non-gameplay issues (crashes, installs, mods, performance).",
+      "train_passed": 7,
+      "train_failed": 5,
+      "train_total": 12,
+      "train_results": [
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.6666666666666666,
+          "triggers": 2,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "test_passed": 4,
+      "test_failed": 4,
+      "test_total": 8,
+      "test_results": [
+        {
+          "query": "explain how the paranoia mechanic works if i'm playing tankie soviets",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "quick q - in hoi4 does the land doctrine system still work as a research tree or did they change that in a recent patch",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm trying to get the achievement where you sink the HMS Hood as Japan, any tips on how that actually works mechanically?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "My friend says I should build 7/2 infantry templates but someone else said 20-width is outdated now, what's actually good in the current patch?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "I'm building a spreadsheet to track my Steam game library including playtime for Hearts of Iron 4 and other Paradox games, can you help with the formulas?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "Can you recommend some good tank documentaries about WWII armored warfare?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm modding Hearts of Iron 4 and need help writing a new focus tree in the .txt scripting language - how does the effect = { } syntax work?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "How do I set up a dedicated game server for Hearts of Iron 4 multiplayer on my Linux box - like the actual port forwarding and hosting part?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ],
+      "passed": 7,
+      "failed": 5,
+      "total": 12,
+      "results": [
+        {
+          "query": "What DLC do I need for the ship designer feature in Hearts of Iron IV?",
+          "should_trigger": true,
+          "trigger_rate": 0.3333333333333333,
+          "triggers": 1,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "i keep losing naval battles as the uk even though i have more ships, whats going on with screening ratios",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "How much political power does declaring war cost, and does that change based on who I'm attacking in HOI4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "Can you help me figure out a good 40w armor division template for 1940 as the Soviets?",
+          "should_trigger": true,
+          "trigger_rate": 0.6666666666666666,
+          "triggers": 2,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "yo i just started a campaign as germany in hoi4 and i have no idea what focuses to pick first, help?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's the exact formula for how supply hubs calculate their range in Hearts of Iron 4?",
+          "should_trigger": true,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": false
+        },
+        {
+          "query": "What's a good strategy board game similar to Axis & Allies I could play with my family this weekend?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "What other grand strategy games has Paradox made besides Hearts of Iron 4?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I want to write a fan-fiction story set in an alternate WWII where Romania stays neutral the whole war",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "how much does hearts of iron 4 cost on steam right now and is it on sale",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "I'm writing a history essay about the actual WWII Battle of Kursk, not the game version - can you help me outline it?",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        },
+        {
+          "query": "my hoi4 keeps crashing on startup after the last windows update, any idea whats wrong",
+          "should_trigger": false,
+          "trigger_rate": 0.0,
+          "triggers": 0,
+          "runs": 3,
+          "pass": true
+        }
+      ]
+    }
+  ]
+}
