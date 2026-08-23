@@ -112,6 +112,26 @@ Amerindian Nations, Horn of Africa nations, Reichskommissariats, releasable poli
 built as 18 parallel Haiku agents, all succeeded (one retry round after a mid-run session-limit
 pause, cached results replayed instantly on resume). `05-countries/` total: **117 files**.
 
+### `05-countries/` — packaging restructure, 117 → 58 files (2026-08-23)
+
+claude.ai rejects `.skill` uploads with more than 200 files in the zip; the packaged skill (see
+`skill/hoi4-companion.skill`) hit 252. `05-countries/` was the biggest contributor at 117 files,
+65 of which are minor countries with no dedicated `06-focus-trees/` page (generic tree only) —
+individually 3-10 KB each.
+
+Merged those 65 minus the already-regional group files, plus the pre-existing
+`formable-nations-<region>.md` (6), `releasable-countries-<region>.md` (6), and
+`indian-/indonesian-princely-states.md` (2), into 5 regional files: `minor-europe.md`,
+`minor-middle-east-africa.md`, `minor-americas.md`, `minor-asia-and-china-warlords.md`,
+`other-formable-releasable-entities.md`. 64 source files → 5, each country/entity kept as its own
+`##` section (original `##` headings demoted to `###`+ so they nest correctly). Pure
+concatenation via a one-off script — no content rewritten, no facts touched.
+`releasable-political-parties-and-leaders.md` (132 KB) was left standalone; it's already a single
+coherent topic. Countries with a dedicated focus tree (Germany, USSR, majors, etc.) were not
+touched. `05-countries/` total: **58 files**. Corpus total: 250 → 191 content files. Both
+`wiki-crawler/corpus/_tooling/manifest.tsv` and `skill/hoi4-companion/references/05-countries/`
+were updated to match; see `skill/hoi4-companion/SKILL.md` for the updated routing note.
+
 ### `06-focus-trees/` — 54 files, ~3 MB
 Condensed from the raw 88-page category listing: base-game variants and sub-branch pages folded
 into their country's single file (Germany's 3 source pages → 1 file), 15 minor Chinese warlord

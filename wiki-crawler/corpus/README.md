@@ -3,7 +3,7 @@
 Markdown corpus scraped and distilled from `hoi4.paradoxwikis.com`, formatted for retrieval by an
 LLM agent. Game version 1.19 unless a file's front matter says otherwise.
 
-**Build complete.** 250 content files, 7.0 MB. See `LEDGER.md` for how it was built, what got
+**Build complete.** 191 content files, 6.9 MB. See `LEDGER.md` for how it was built, what got
 condensed and why, and known data-quality issues. See `INDEX.md` for routing hints — "question
 about X → read file Y".
 
@@ -15,13 +15,19 @@ about X → read file Y".
 02-land-warfare/  divisions, combat, tactics, land doctrine, tank designer, unit stats              12 files
 03-air-warfare/   missions, air combat, aircraft designer, air doctrine                              5 files
 04-naval-warfare/ fleets, naval combat, ship designer, naval doctrine                                 6 files
-05-countries/     one profile per 1936-start country + formable/releasable/regional-group files    117 files
+05-countries/     one profile per country with its own focus tree + 5 regional group files          58 files
 06-focus-trees/   one file per national focus tree, joint/shared branches, Chinese warlords shared  54 files
 07-achievements/  per-DLC-group achievement files + index                                            18 files
 08-strategy/      build orders, doctrine choice, meta by domain, common mistakes — mostly synthesis  10 files
 09-reference/     modifier list, state list, commander/ace/MIO rosters                                5 files
 _tooling/         fetch snippet, style guide, manifest, raw master-page snapshots
 ```
+
+`05-countries/` was originally 117 one-file-per-country profiles; countries without a dedicated
+focus tree (generic tree only) were merged into 5 regional files (`minor-europe.md`,
+`minor-middle-east-africa.md`, `minor-americas.md`, `minor-asia-and-china-warlords.md`,
+`other-formable-releasable-entities.md`) on 2026-08-23 so the packaged `.skill` zip stays under
+claude.ai's 200-file cap. Pure concatenation, no content rewritten — see `LEDGER.md`.
 
 This directory is a **build/staging corpus**, not the shipped product. Finished, condensed content
 gets copied into `../.claude/skills/hoi4-companion/references/<same category name>/` — see that

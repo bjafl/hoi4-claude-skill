@@ -48,7 +48,7 @@ here follows) so content can be synced over without renaming:
 | `references/02-land-warfare/` | Divisions, combat, tactics, land doctrine, tank designer, unit stats |
 | `references/03-air-warfare/` | Air missions, air combat, aircraft designer, air doctrine |
 | `references/04-naval-warfare/` | Fleets, naval combat, ship designer, naval doctrine |
-| `references/05-countries/` | One file per 1936-start country: starting stats, ideology, spirits, unique mechanics, neighbours |
+| `references/05-countries/` | Starting stats, ideology, spirits, unique mechanics, neighbours. One file per country that has its own focus tree; countries using the generic tree are grouped regionally (`minor-europe.md`, `minor-middle-east-africa.md`, `minor-americas.md`, `minor-asia-and-china-warlords.md`, `other-formable-releasable-entities.md`) — grep the directory for a specific minor country/entity |
 | `references/06-focus-trees/` | Full national focus tree breakdowns (name → prereqs → mutually exclusive → effects → typical path) |
 | `references/07-achievements/` | Achievement list + per-DLC-group strategy notes (not one file per achievement — see condensing rule below) |
 | `references/08-strategy/` | Build orders, doctrine-choice guidance, meta by era — much of this is `**Inferred:**`, not scraped |
@@ -87,8 +87,9 @@ lives in doesn't. When condensing corpus content into a reference file here:
 
 ## Status
 
-Complete. All 10 categories copied over from `wiki-crawler/corpus/` (250 files, ~7 MB) —
+Complete. All 10 categories copied over from `wiki-crawler/corpus/` (191 files, ~6.9 MB) —
 see that directory's `LEDGER.md` for build history and known data-quality notes, and
-`references/INDEX.md` here for the same "question about X → read file Y" routing table. Not yet
-done: an eval pass (test cases + description-triggering check) and packaging into a `.skill` file
-for claude.ai upload.
+`INDEX.md` there for the same "question about X → read file Y" routing table.
+`05-countries/` was restructured on 2026-08-23 (117 → 58 files, minor countries merged into 5
+regional files) to keep `hoi4-companion.skill` under claude.ai's 200-file zip cap — see
+`LEDGER.md`'s "packaging restructure" entry.

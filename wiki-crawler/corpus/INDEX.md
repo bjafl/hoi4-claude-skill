@@ -7,12 +7,17 @@ exact source pages are in `_tooling/manifest.tsv`; this file is for topic routin
 
 These three categories are flat and large; there's no per-file table below, just the naming rule:
 
-- **`05-countries/<common-name>.md`** — one file per 1936-start country (`germany.md`,
-  `soviet-union.md`, `united-kingdom.md`, `nationalist-spain.md`-style names). Covers 1936 starting
-  stats, government, national spirits, unique mechanics, neighbours. Plus non-country-named group
-  files: `formable-nations-<region>.md`, `releasable-countries-<region>.md`,
-  `indian-princely-states.md`, `indonesian-princely-states.md`, `amerindian-nations.md`,
-  `horn-of-africa-nations.md`, `reichskommissariats.md`, `releasable-political-parties-and-leaders.md`.
+- **`05-countries/<common-name>.md`** — one file per 1936-start country that has its own
+  `06-focus-trees/` page (`germany.md`, `soviet-union.md`, `united-kingdom.md`,
+  `nationalist-spain.md`-style names). Covers 1936 starting stats, government, national spirits,
+  unique mechanics, neighbours. Countries without a dedicated focus tree (they use the generic
+  tree) are grouped regionally instead, one `##`-per-country section per file, to keep the
+  packaged skill under claude.ai's 200-file zip cap: `minor-europe.md`,
+  `minor-middle-east-africa.md`, `minor-americas.md`, `minor-asia-and-china-warlords.md`,
+  `other-formable-releasable-entities.md` (this last one also covers `formable-nations-<region>`,
+  `releasable-countries-<region>`, and the princely-states pages that used to be separate files —
+  find a specific minor country/entity by grepping `05-countries/` for its name).
+  `releasable-political-parties-and-leaders.md` stays a standalone file (132 KB, single topic).
 - **`06-focus-trees/<common-name>.md`** — same naming as `05-countries/`, one file per nation's
   focus tree (cross-links back to the matching `05-countries/` profile). Exceptions:
   `china-warlords.md` (shared by the ~12 minor Chinese warlord factions — their own country files
