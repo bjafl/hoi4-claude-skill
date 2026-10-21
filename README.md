@@ -54,6 +54,15 @@ and known data-quality caveats.
 
 ## Attribution
 
-Content derived from the Hearts of Iron IV Wiki (paradoxwikis.com), published
-under Attribution-ShareAlike. Game data is factual; prose has been rewritten.
-Retain attribution if you redistribute.
+Content derived from the [Hearts of Iron IV Wiki](https://hoi4.paradoxwikis.com),
+published under Creative Commons Attribution-ShareAlike (CC BY-SA 3.0). Game
+data is factual; prose has been rewritten and condensed. Retain attribution
+and the same license if you redistribute.
+
+Hearts of Iron IV is a trademark of Paradox Interactive. This project is not
+affiliated with or endorsed by Paradox.
+
+## License
+
+Code is MIT ([LICENSE](LICENSE)); the wiki-derived corpus and skill content
+are CC BY-SA 3.0 ([LICENSE-CONTENT.md](LICENSE-CONTENT.md)).

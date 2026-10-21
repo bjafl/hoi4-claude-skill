@@ -9,3 +9,8 @@ __pycache__/
 
 # Node (skills CLI installer artifacts, if any appear)
 node_modules/
+
+# local agent tooling (not part of the project)
+.agents/
+.claude/skills/developing-claude-code-plugins
+skills-lock.json
